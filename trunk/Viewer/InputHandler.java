@@ -22,31 +22,46 @@ public class InputHandler implements KeyListener,MouseListener{
 			Renderer.wireframe = ! Renderer.wireframe;
 			break;
 		case KeyEvent.VK_W:
-		    yrotrad = (Camera.yRot / 180 * 3.141592654f);
-		    xrotrad = (Camera.xRot / 180 * 3.141592654f);
+		    yrotrad = (float)Math.toRadians(Camera.yRot);
+		    xrotrad = (float)Math.toRadians(Camera.xRot);
 		    Camera.xPos += (float)(Math.sin(yrotrad)) ;
 		    Camera.zPos -= (float)(Math.cos(yrotrad)) ;
 		    Camera.yPos -= (float)(Math.sin(xrotrad)) ;
         	break;
 		case KeyEvent.VK_S:
-		    yrotrad = (Camera.yRot / 180 * 3.141592654f);
-		    xrotrad = (Camera.xRot / 180 * 3.141592654f);
+		    yrotrad = (float)Math.toRadians(Camera.yRot);
+		    xrotrad = (float)Math.toRadians(Camera.xRot);
 		    Camera.xPos -= (float)(Math.sin(yrotrad)) ;
 		    Camera.zPos += (float)(Math.cos(yrotrad)) ;
 		    Camera.yPos += (float)(Math.sin(xrotrad)) ;
         	break;
 		case KeyEvent.VK_A:
-			yrotrad = (Camera.yRot / 180 * 3.141592654f);
+			yrotrad = (float)Math.toRadians(Camera.yRot);
 			Camera.xPos -= (float)(Math.cos(yrotrad))*0.2 ;
 			Camera.zPos -= (float)(Math.sin(yrotrad))*0.2 ;
         	break;
 		case KeyEvent.VK_D:
-			yrotrad = (Camera.yRot / 180 * 3.141592654f);
+			yrotrad = (float)Math.toRadians(Camera.yRot);
 			Camera.xPos += (float)(Math.cos(yrotrad))*0.2 ;
 			Camera.zPos += (float)(Math.sin(yrotrad))*0.2 ;
         	break;
 		case KeyEvent.VK_R:
 			Camera.reset();
+        	break;
+		case KeyEvent.VK_P:
+			Camera.printCoordinates();
+        	break;
+		case KeyEvent.VK_UP:
+			Sun.y += 30f;
+        	break;
+		case KeyEvent.VK_DOWN:
+			Sun.y -= 30f;
+        	break;
+		case KeyEvent.VK_LEFT:
+			Sun.x -= 30f;
+        	break;
+		case KeyEvent.VK_RIGHT:
+			Sun.x += 30f;
         	break;
 		}	
 	}

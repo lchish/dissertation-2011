@@ -13,11 +13,11 @@ public class Renderer implements GLEventListener{
 	DunedinMap dunedinMap;
 	Sun sun;
 	Camera camera;
-	public static float scale = 0.01f;
+	public static float scale = 0.1f;
 	public static boolean wireframe = false;
 	public Renderer(File f){
 		dunedinMap = new DunedinMap(f);
-		sun = new Sun(0,100000,0);
+		sun = new Sun(0,1000,0);
 		camera = new Camera();
 	}
 	public void update(){
@@ -30,14 +30,13 @@ public class Renderer implements GLEventListener{
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 		gl.glLoadIdentity();                                 // Reset The Matrix
 		camera.set(gl);
-		//glu.gluLookAt(212f, 60f, 194f, 186f, 20f, 171f, 0, 1, 0);
-		gl.glScalef(scale, scale*2.0f, scale);
+		gl.glScalef(scale, scale, scale);
 		if(wireframe)
 			gl.glPolygonMode( GL2.GL_FRONT_AND_BACK, GL2.GL_LINE );
 		else
 			gl.glPolygonMode( GL2.GL_FRONT_AND_BACK, GL2.GL_FILL );
-		dunedinMap.draw(gl);
 		sun.draw(gl);
+		dunedinMap.draw(gl);
 	}
 
 	@Override
@@ -53,7 +52,11 @@ public class Renderer implements GLEventListener{
 		gl.glClearDepth(1.0f);                     // Depth Buffer Setup
 		gl.glEnable(GL.GL_DEPTH_TEST);             // Enables Depth Testing
 		gl.glDepthFunc(GL.GL_LEQUAL);              // The Type Of Depth Testing To Do
-
+		
+		gl.glEnable(GL2.GL_LIGHTING);              // Helpful lighting settings
+		gl.glEnable(GL2.GL_LIGHT0);
+		gl.glColorMaterial( GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE ) ;
+		gl.glEnable ( GL2.GL_COLOR_MATERIAL ) ;
 		// Really Nice Perspective Calculations
 		gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 
