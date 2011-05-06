@@ -29,18 +29,20 @@ public class Renderer implements GLEventListener{
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 		gl.glLoadIdentity();                                 // Reset The Matrix
+		//camera.setPosition(-11f, 18.8f, 21f, 27f, 28f);
 		camera.set(gl);
 		gl.glScalef(scale, scale, scale);
 		if(wireframe)
 			gl.glPolygonMode( GL2.GL_FRONT_AND_BACK, GL2.GL_LINE );
 		else
 			gl.glPolygonMode( GL2.GL_FRONT_AND_BACK, GL2.GL_FILL );
-		sun.draw(gl);
+		//sun.draw(gl);
 		dunedinMap.draw(gl);
 	}
 
 	@Override
-	public void dispose(GLAutoDrawable arg0) {
+	public void dispose(GLAutoDrawable drawable) {
+		dunedinMap.deleteVertexBuffer(drawable.getGL().getGL2());
 	}
 
 	@Override
@@ -59,6 +61,7 @@ public class Renderer implements GLEventListener{
 		gl.glEnable ( GL2.GL_COLOR_MATERIAL ) ;
 		// Really Nice Perspective Calculations
 		gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
+		dunedinMap.init(gl);
 
 	}
 

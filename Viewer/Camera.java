@@ -22,4 +22,12 @@ public class Camera {
 		System.out.println("xRot: " + xRot + " yRot: " + yRot);
 		System.out.println("xPos: " + xPos + " yPos: " + yPos + " zPos: " + zPos);
 	}
+	public void setPosition(float xPos,float yPos,float zPos,float xRot,float yRot){
+		Camera.xPos=xPos;
+		Camera.yPos=yPos;
+		Camera.zPos=zPos;
+		Camera.xRot=xRot;
+		Camera.yRot=yRot;
+		
+	}
 }
