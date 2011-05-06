@@ -14,24 +14,29 @@ public class Sun {
 		Sun.x =x; Sun.y=y;Sun.z=z;
 	}
 	public void draw(GL2 gl){
-		lighting(gl);
 		gl.glPushMatrix();
+		
 		gl.glColor3f(1.0f, 1.0f, 1.0f);
 		GLUquadric quadratic = glu.gluNewQuadric();
     	glu.gluQuadricDrawStyle(quadratic, GLU.GLU_LINE);
     	glu.gluQuadricNormals(quadratic,GLU.GLU_SMOOTH);
     	gl.glTranslatef(x,y,z);
-		glu.gluSphere(quadratic, 400f, 20, 20);
+    	lighting(gl);
+		glu.gluSphere(quadratic, 40f, 20, 20);
 		gl.glPopMatrix();
 	}
 	private void lighting(GL2 gl) {
-		float [] pos = {x,y+100f,z};
+		float [] pos = {x,y,z,0};
 		gl.glLightfv(GL2.GL_LIGHT0,GL2.GL_POSITION,pos,0);
-		gl.glLightfv(GL2.GL_LIGHT0,GL2.GL_AMBIENT,ambientLight,0);
-		gl.glLightfv(GL2.GL_LIGHT0,GL2.GL_DIFFUSE,diffuseLight,0);
-		gl.glLightfv(GL2.GL_LIGHT0,GL2.GL_SPECULAR,specularLight,0);
+		
 	}
 	public void update(){
 		//move the xyz coordinates according to our time tick
+	}
+	public void init(GL2 gl){
+		gl.glLightfv(GL2.GL_LIGHT0,GL2.GL_AMBIENT,ambientLight,0);
+		gl.glLightfv(GL2.GL_LIGHT0,GL2.GL_DIFFUSE,diffuseLight,0);
+		gl.glLightfv(GL2.GL_LIGHT0,GL2.GL_SPECULAR,specularLight,0);
+		gl.glEnable(GL2.GL_LIGHT0);
 	}
 }

@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLProfile;
@@ -18,7 +17,7 @@ public class HeightMapper {
 		GLProfile.initSingleton( false );
 	}
 	public static void main(String [] args){
-		Renderer r  = new Renderer(new File("dunedin.txt"));
+		Renderer r  = new Renderer("dunedin.txt");
 		GLProfile glprofile = GLProfile.getDefault();
 		GLCapabilities glcapabilities = new GLCapabilities( glprofile );
 		GLCanvas glcanvas = new GLCanvas( glcapabilities );

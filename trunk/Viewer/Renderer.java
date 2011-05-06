@@ -1,6 +1,3 @@
-import java.io.File;
-
-
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
@@ -14,9 +11,9 @@ public class Renderer implements GLEventListener{
 	Sun sun;
 	Camera camera;
 	public static float scale = 0.1f;
-	public static boolean wireframe = false;
-	public Renderer(File f){
-		dunedinMap = new DunedinMap(f);
+	public static boolean wireframe = false,lighting =false;
+	public Renderer(String filename){
+		dunedinMap = new DunedinMap(filename);
 		sun = new Sun(0,1000,0);
 		camera = new Camera();
 	}
@@ -29,14 +26,17 @@ public class Renderer implements GLEventListener{
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 		gl.glLoadIdentity();                                 // Reset The Matrix
-		//camera.setPosition(-11f, 18.8f, 21f, 27f, 28f);
+		if(lighting)
+			gl.glEnable(GL2.GL_LIGHTING);
+		else
+			gl.glDisable(GL2.GL_LIGHTING);
 		camera.set(gl);
 		gl.glScalef(scale, scale, scale);
 		if(wireframe)
 			gl.glPolygonMode( GL2.GL_FRONT_AND_BACK, GL2.GL_LINE );
 		else
 			gl.glPolygonMode( GL2.GL_FRONT_AND_BACK, GL2.GL_FILL );
-		//sun.draw(gl);
+		sun.draw(gl);
 		dunedinMap.draw(gl);
 	}
 
@@ -55,14 +55,12 @@ public class Renderer implements GLEventListener{
 		gl.glEnable(GL.GL_DEPTH_TEST);             // Enables Depth Testing
 		gl.glDepthFunc(GL.GL_LEQUAL);              // The Type Of Depth Testing To Do
 		
-		gl.glEnable(GL2.GL_LIGHTING);              // Helpful lighting settings
-		gl.glEnable(GL2.GL_LIGHT0);
 		gl.glColorMaterial( GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE ) ;
 		gl.glEnable ( GL2.GL_COLOR_MATERIAL ) ;
 		// Really Nice Perspective Calculations
 		gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 		dunedinMap.init(gl);
-
+		sun.init(gl);
 	}
 
 	@Override
