@@ -63,7 +63,10 @@ public class InputHandler implements KeyListener,MouseListener{
 		case KeyEvent.VK_RIGHT:
 			Sun.x += 30f;
         	break;
-		}	
+		case KeyEvent.VK_L:
+			Renderer.lighting = ! Renderer.lighting;
+			break;
+		}
 	}
 
 	@Override
