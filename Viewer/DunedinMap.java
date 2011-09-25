@@ -1,5 +1,5 @@
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.*;
 import java.util.Scanner;
 
@@ -9,36 +9,52 @@ import com.jogamp.common.nio.Buffers;
 
 public class DunedinMap {
 
-	public int MapWidth=1237,MapHeight=883;
-	//public int MapWidth=100,MapHeight=100;
+	public int MapWidth=1237,MapHeight=881;
 	private int [] vertexBuffer,colourBuffer,normalBuffer;
 	private int numVerticies;
 	public float [][] Map;
-	private static final int STEP_SIZE = 4;
-	
-	public DunedinMap(String filename){
+	private float heightScale = 10;
+	public BufferedImage terrain, suburbs;
+
+	public DunedinMap(String heightData,String terrainData,String suburbData){
 		try {
 			Map = new float[MapWidth][MapHeight];
-			Scanner sc  = new Scanner(new File(filename));
+			terrain = TargaReader.getImage(terrainData);
+			suburbs = TargaReader.getImage(suburbData);
+			Scanner sc  = new Scanner(new File(heightData));
+			
 			for(int y = 0; sc.hasNextLine() && y < MapHeight;y++){
 				Scanner line = new Scanner(sc.nextLine());
 				for(int x = 0;line.hasNextFloat() && x <MapWidth;x++){
 					float tmp = line.nextFloat();
-					Map[x][y] = tmp < 0.01f ? -1f : tmp;
+					if((terrain.getRGB(x,y) & 0xFF) == 0xFF){
+						//in water
+						Map[x][y] = 0f;
+					}else{
+						Map[x][y] = tmp/heightScale;
+					}
 				}
 			}
-
-		} catch (FileNotFoundException e) {
-			System.err.println("Unable to open height data: " + filename);
+		} catch (Exception e) {
+			System.err.println("Unable to open height data: " + heightData);
+			e.printStackTrace();
 		}
 		
 	}
 	public void init(GL2 gl){
 		createVertexBuffer(gl);
 	}
+	
+	public static int [] getPixelAsFloat(int pixel) {
+		int [] ret = new int[4];
+	    ret[0] = (pixel >> 16) & 0xff;//red
+	    ret[1] = (pixel >> 8) & 0xff;//green
+	    ret[2] = pixel & 0xff;//blue
+	    ret[3] = (pixel >> 24) & 0xff;//alpha
+	    return ret;
+	  }
+	
 	public void createVertexBuffer(GL2 gl){
-		float halfWidth = (MapWidth/2) * STEP_SIZE;
-		float halfHeight = (MapHeight/2) * STEP_SIZE;
 		numVerticies = (MapWidth -1) * (MapHeight-1)*4;
 		int numFloatValues = numVerticies *3;
 		vertexBuffer = new int[1];
@@ -58,47 +74,37 @@ public class DunedinMap {
 				
 				//bottom left vertex
 				float y = Map[x][z];
-				if(y <0.01f){
-					float [] colour = {0f,0f,1f};
-					colours.put(colour);
-				}else{
-					float [] colour = {0,Map[x][z]/512,0};
-					colours.put(colour);
-				}
-				float [] pos1 = {(float)x*STEP_SIZE - halfWidth, y, (float)z*STEP_SIZE - halfHeight};
+				int [] tmp;
+				tmp = getPixelAsFloat(suburbs.getRGB(x,z));
+				float [] colour1 = {tmp[0]/255f,tmp[1]/255f,tmp[2]/255f};
+				colours.put(colour1);
+				float [] pos1 = {(float)x , y, (float)z};
 				points.put(pos1);
 				//top left Vertex
 				y = Map[x][z+1];
-				if(y <0.01f){
-					float [] colour = {0f,0f,1f};
-					colours.put(colour);
-				}else{
-					float [] colour = {0,Map[x][z]/512,0};
-					colours.put(colour);
-				}
-				float [] pos2 = {(float)(x*STEP_SIZE)- halfWidth, y, (float)((z+1)*STEP_SIZE)- halfHeight};
+				tmp = getPixelAsFloat(suburbs.getRGB(x,z));
+
+				float [] colour2 = {tmp[0]/255f,tmp[1]/255f,tmp[2]/255f};
+				colours.put(colour2);
+				float [] pos2 = {(float)(x), y, (float)((z+1))};
 				points.put(pos2);
 				//top right Vertex
 				y = Map[x+1][z+1];
-				if(y <0.01f){
-					float [] colour = {0f,0f,1f};
-					colours.put(colour);
-				}else{
-					float [] colour = {0,Map[x][z]/512,0};
-					colours.put(colour);
-				}
-				float [] pos3 = {(float)((x+1)*STEP_SIZE)- halfWidth, y, (float)((z+1)*STEP_SIZE)- halfHeight};
+				tmp = getPixelAsFloat(suburbs.getRGB(x,z));
+
+				float [] colour3 = {tmp[0]/255f,tmp[1]/255f,tmp[2]/255f};
+				colours.put(colour3);
+				float [] pos3 = {(float)((x+1)), y, (float)((z+1))};
 				points.put(pos3);
 				//bottom right Vertex
 				y = Map[x+1][z];
-				if(y <0.01f){
-					float [] colour = {0f,0f,1f};
-					colours.put(colour);
-				}else{
-					float [] colour = {0,Map[x][z]/512,0};
-					colours.put(colour);
-				}
-				float [] pos4 = {(float)(x+1)*STEP_SIZE- halfWidth, y, (float)z*STEP_SIZE- halfHeight};
+				tmp = getPixelAsFloat(suburbs.getRGB(x,z));
+				/*if(tmp[2] != 0xFF){
+					tmp = getPixelAsFloat(suburbs.getRGB(x,z));
+				}*/
+				float [] colour4 = {tmp[0]/255f,tmp[1]/255f,tmp[2]/255f};
+				colours.put(colour4);
+				float [] pos4 = {(float)(x+1), y, (float)z};
 				points.put(pos4);
 				//calculate the normals for all of the vertices
 				Vec3f normal = calculateNormal(new Vec3f(pos1),new Vec3f(pos2),new Vec3f(pos3));
@@ -144,20 +150,7 @@ public class DunedinMap {
 		gl.glDeleteBuffers(colourBuffer.length,colourBuffer,0);
 		gl.glDeleteBuffers(normalBuffer.length,normalBuffer,0);
 	}
-	private class Vec3f{
-		float x,y,z;
-		public Vec3f(float[] a){
-			x=a[0];
-			y=a[1];
-			z=a[2];
-		}
-		public Vec3f(){x=y=z=0f;};
-		public float [] toFloatArray(){
-			float [] ret = new float[3];
-			ret[0]=x;ret[1]=y;ret[2]=z;
-			return ret;
-		}
-	}
+	
 	public Vec3f calculateNormal(Vec3f pos1,Vec3f pos2,Vec3f pos3)
     {
 		Vec3f normal = new Vec3f();
@@ -184,4 +177,13 @@ public class DunedinMap {
         normal.z /= length;
         return normal;
     }
+	public int getWidth(){
+		return MapWidth;
+	}
+	public int getHeight(){
+		return MapHeight;
+	}
+	public double getMapHeight(int x,int y){
+		return Map[x][y];
+	}
 }

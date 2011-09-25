@@ -17,11 +17,15 @@ public class HeightMapper {
 		GLProfile.initSingleton( false );
 	}
 	public static void main(String [] args){
-		Renderer r  = new Renderer("dunedin.txt");
+		if(args.length == 1){
+			//use the text file for input reading?
+		}
+		Time time = new Time();
+		Renderer r  = new Renderer("dunedin.txt","terrain.tga","suburbs.tga",time);
 		GLProfile glprofile = GLProfile.getDefault();
 		GLCapabilities glcapabilities = new GLCapabilities( glprofile );
 		GLCanvas glcanvas = new GLCanvas( glcapabilities );
-		InputHandler i = new InputHandler();
+		InputHandler i = new InputHandler(r,time,r.getCamera());
 		glcanvas.addGLEventListener(r);
 		glcanvas.addKeyListener(i);
 		glcanvas.addMouseListener(i);
@@ -35,7 +39,7 @@ public class HeightMapper {
         });
         
         jframe.getContentPane().add( glcanvas, BorderLayout.CENTER );
-        jframe.setSize( 1280, 800 );
+        jframe.setSize( 1024, 768 );
         anim.start();
         jframe.setVisible( true );
 	}
