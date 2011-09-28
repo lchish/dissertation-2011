@@ -23,7 +23,7 @@ import static javax.media.opengl.GL3bc.*;
 
 public class ShaderUtils {
 
-    /*
+    
     //uses the correct logcalls and avoids the oldskool ARB stuff ...
     //suggested by julien: http://jogamp.762907.n3.nabble.com/problems-with-shaders-tt2092883.html#a2316436
     public static void checkShaderLogInfo(GL2 inGL, int inShaderObjectID) {
@@ -44,36 +44,7 @@ public class ShaderUtils {
                 throw new GLException("Error during shader compilation: " + out);
             } 
     }
-    */
     
-    //I like it the oldskool way ... :)
-    public static void checkShaderLogInfo(GL2 inGL, int inShaderObjectID) {
-        IntBuffer tReturnValue = Buffers.newDirectIntBuffer(1);
-        inGL.glGetObjectParameterivARB(inShaderObjectID, GL_OBJECT_INFO_LOG_LENGTH_ARB, tReturnValue);
-        int tLogLength = tReturnValue.get();
-        if (tLogLength <= 1) {
-            return;
-        }
-        ByteBuffer tShaderLog = Buffers.newDirectByteBuffer(tLogLength);
-        tReturnValue.flip();
-        inGL.glGetInfoLogARB(inShaderObjectID, tLogLength, tReturnValue, tShaderLog);
-        byte[] tShaderLogBytes = new byte[tLogLength];
-        tShaderLog.get(tShaderLogBytes);
-        String tShaderValidationLog = new String(tShaderLogBytes);
-        StringReader tStringReader = new StringReader(tShaderValidationLog);
-        LineNumberReader tLineNumberReader = new LineNumberReader(tStringReader);
-        String tCurrentLine;
-        try {
-            while ((tCurrentLine = tLineNumberReader.readLine()) != null) {
-                if (tCurrentLine.trim().length()>0) {
-                	System.err.println("GLSL VALIDATION: "+tCurrentLine.trim());
-                }
-            }
-        } catch (Exception e) {
-        	e.printStackTrace();
-            System.exit(1);
-        }
-    }
 
     public static String loadShaderSourceFileAsString(String inFileName) {
     	System.err.println("LOADING SHADER SOURCECODE FROM "+inFileName);

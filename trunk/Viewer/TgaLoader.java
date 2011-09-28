@@ -14,6 +14,15 @@ class TargaReader {
                 return decode(buf);
         }
 
+        public static int [] getImagePixels(String fileName) throws IOException {
+            File f = new File(fileName);
+            byte[] buf = new byte[(int)f.length()];
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(f));
+            bis.read(buf);
+            bis.close();
+            return decodePixels(buf);
+    }
+
         private static int offset;
 
         private static int btoi(byte b) {
@@ -28,12 +37,6 @@ class TargaReader {
         public static BufferedImage decode(byte[] buf) throws IOException {
                 offset = 0;
 
-                // Reading header bytes
-                // buf[2]=image type code 0x02=uncompressed BGR or BGRA
-                // buf[12]+[13]=width
-                // buf[14]+[15]=height
-                // buf[16]=image pixel size 0x20=32bit, 0x18=24bit 
-                // buf{17]=Image Descriptor Byte=0x28 (00101000)=32bit/origin upperleft/non-interleaved
                 for (int i=0;i<12;i++)
                         read(buf);
                 int width = read(buf)+(read(buf)<<8);   // 00,04=1024
@@ -93,4 +96,79 @@ class TargaReader {
                 bimg.setRGB(0, 0, width,height, pixels, 0,width);
                 return bimg;
         }
+        public static int [] decodePixels(byte[] buf) throws IOException {
+            offset = 0;
+
+            for (int i=0;i<12;i++)
+                    read(buf);
+            int width = read(buf)+(read(buf)<<8);   // 00,04=1024
+            int height = read(buf)+(read(buf)<<8);  // 40,02=576
+            read(buf);
+            read(buf);
+
+            int n = width*height;
+            int[] pixels = new int[n*4];
+            int idx=0;
+
+            if (buf[2]==0x02 && buf[16]==0x20) { // uncompressed BGRA
+                while(n>0) {
+                    int b = read(buf);
+                    pixels[idx++] = b;
+                    int g = read(buf);
+                    pixels[idx++] = g;
+                    int r = read(buf);
+                    pixels[idx++] = r;
+                    int a = read(buf);
+                    pixels[idx++] = a;
+                    n-=1;
+                }
+            } else if (buf[2]==0x02 && buf[16]==0x18) {  // uncompressed BGR
+                while(n>0) {
+                    int b = read(buf);
+                    pixels[idx++] = b;
+                    int g = read(buf);
+                    pixels[idx++] = g;
+                    int r = read(buf);
+                    pixels[idx++] = r;
+                    int a = 255; // opaque pixel
+                    pixels[idx++] = a;
+                    n-=1;
+                }
+            } else {
+                // RLE compressed
+                while (n>0) {
+                    int nb = read(buf); // num of pixels
+                    if ((nb&0x80)==0) { // 0x80=dec 128, bits 10000000
+                        for (int i=0;i<=nb;i++) {
+                            int b = read(buf);
+                            pixels[idx++] = b;
+                            int g = read(buf);
+                            pixels[idx++] = g;
+                            int r = read(buf);
+                            pixels[idx++] = r;
+                            pixels[idx++] = 0xff;
+                        }
+                    } else {
+                        nb &= 0x7f;
+                        int b = read(buf);
+                        pixels[idx++] = b;
+                        int g = read(buf);
+                        pixels[idx++] = g;
+                        int r = read(buf);
+                        pixels[idx++] = r;
+                        pixels[idx++] = 0xff;
+                        for (int i=0;i<=nb;i++){
+                        	pixels[idx++] = b;
+                        	pixels[idx++] = g;
+                        	pixels[idx++] = r;
+                        	pixels[idx++] = 0xff;
+                        }
+                    }
+                    n-=nb+1;
+                }
+            }
+
+            
+            return pixels;
+    }
 }

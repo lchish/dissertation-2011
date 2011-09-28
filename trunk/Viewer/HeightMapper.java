@@ -20,7 +20,7 @@ public class HeightMapper {
 		if(args.length == 1){
 			//use the text file for input reading?
 		}
-		Time time = new Time();
+		Time time = new Time(2011,9,1,12,0,0);
 		Renderer r  = new Renderer("dunedin.txt","terrain.tga","suburbs.tga",time);
 		GLProfile glprofile = GLProfile.getDefault();
 		GLCapabilities glcapabilities = new GLCapabilities( glprofile );

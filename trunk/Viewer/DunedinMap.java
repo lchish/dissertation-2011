@@ -10,7 +10,7 @@ import com.jogamp.common.nio.Buffers;
 public class DunedinMap {
 
 	public int MapWidth=1237,MapHeight=881;
-	private int [] vertexBuffer,colourBuffer,normalBuffer;
+	private int [] vertexBuffer,colourBuffer,normalBuffer,textureBuffer;
 	private int numVerticies;
 	public float [][] Map;
 	private float heightScale = 10;
@@ -57,37 +57,46 @@ public class DunedinMap {
 	public void createVertexBuffer(GL2 gl){
 		numVerticies = (MapWidth -1) * (MapHeight-1)*4;
 		int numFloatValues = numVerticies *3;
+		int numFloatValesTex = numVerticies *2;
 		vertexBuffer = new int[1];
 		colourBuffer = new int[1];
 		normalBuffer = new int[1];
+		textureBuffer= new int[1];
 		FloatBuffer points = Buffers.newDirectFloatBuffer(numFloatValues);
 		FloatBuffer colours = Buffers.newDirectFloatBuffer(numFloatValues);
 		FloatBuffer normals = Buffers.newDirectFloatBuffer(numFloatValues);
+		FloatBuffer textureCoord = Buffers.newDirectFloatBuffer(numFloatValesTex);
 		gl.glGenBuffers(vertexBuffer.length, vertexBuffer,0);
 		gl.glGenBuffers(colourBuffer.length,colourBuffer,0);
 		gl.glGenBuffers(normalBuffer.length,normalBuffer,0);
+		gl.glGenBuffers(textureBuffer.length,textureBuffer,0);
 		gl.glEnableClientState(GL2.GL_VERTEX_ARRAY);
 		gl.glEnableClientState(GL2.GL_COLOR_ARRAY);
 		gl.glEnableClientState(GL2.GL_NORMAL_ARRAY);
+		gl.glEnableClientState(GL2.GL_TEXTURE_COORD_ARRAY);
+		
 		for(int x = 0;x<MapWidth-1;x++){
 			for(int z = 0;z <MapHeight-1;z++){
-				
+				float xFloat = (float)x,zFloat = (float)z;
 				//bottom left vertex
 				float y = Map[x][z];
 				int [] tmp;
 				tmp = getPixelAsFloat(suburbs.getRGB(x,z));
 				float [] colour1 = {tmp[0]/255f,tmp[1]/255f,tmp[2]/255f};
 				colours.put(colour1);
-				float [] pos1 = {(float)x , y, (float)z};
+				float [] pos1 = {(float)x , y, zFloat};
 				points.put(pos1);
+				float []texPos1 = {xFloat/MapWidth, (zFloat/MapHeight)};
+				textureCoord.put(texPos1);
 				//top left Vertex
 				y = Map[x][z+1];
 				tmp = getPixelAsFloat(suburbs.getRGB(x,z));
-
 				float [] colour2 = {tmp[0]/255f,tmp[1]/255f,tmp[2]/255f};
 				colours.put(colour2);
-				float [] pos2 = {(float)(x), y, (float)((z+1))};
+				float [] pos2 = {(float)(x), y, zFloat+1.0f};
 				points.put(pos2);
+				float []texPos2 = {xFloat/MapWidth, ((zFloat+1.0f)/MapHeight)};
+				textureCoord.put(texPos2);
 				//top right Vertex
 				y = Map[x+1][z+1];
 				tmp = getPixelAsFloat(suburbs.getRGB(x,z));
@@ -96,16 +105,17 @@ public class DunedinMap {
 				colours.put(colour3);
 				float [] pos3 = {(float)((x+1)), y, (float)((z+1))};
 				points.put(pos3);
+				float []texPos3 = {(xFloat+1.0f)/MapWidth, ((zFloat+1.0f)/MapHeight)};
+				textureCoord.put(texPos3);
 				//bottom right Vertex
 				y = Map[x+1][z];
 				tmp = getPixelAsFloat(suburbs.getRGB(x,z));
-				/*if(tmp[2] != 0xFF){
-					tmp = getPixelAsFloat(suburbs.getRGB(x,z));
-				}*/
 				float [] colour4 = {tmp[0]/255f,tmp[1]/255f,tmp[2]/255f};
 				colours.put(colour4);
 				float [] pos4 = {(float)(x+1), y, (float)z};
 				points.put(pos4);
+				float []texPos4 = {(xFloat+1.0f)/MapWidth,(zFloat/MapHeight)};
+				textureCoord.put(texPos4);
 				//calculate the normals for all of the vertices
 				Vec3f normal = calculateNormal(new Vec3f(pos1),new Vec3f(pos2),new Vec3f(pos3));
 				for(int i =0;i<4;i++){
@@ -113,9 +123,11 @@ public class DunedinMap {
 				}
 			}
 		}
+		
 		points.rewind();
 		colours.rewind();
 		normals.rewind();
+		textureCoord.rewind();
 		//send the vertex and colour data to the gfx card
 		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER, vertexBuffer[0]);
 		gl.glBufferData(GL2.GL_ARRAY_BUFFER, 4*points.capacity(), points, GL2.GL_STATIC_DRAW);
@@ -123,32 +135,44 @@ public class DunedinMap {
 		gl.glBufferData(GL2.GL_ARRAY_BUFFER, 4*colours.capacity(), colours, GL2.GL_STATIC_DRAW);
 		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER, normalBuffer[0]);
 		gl.glBufferData(GL2.GL_ARRAY_BUFFER, 4*normals.capacity(), normals, GL2.GL_STATIC_DRAW);
+		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER, textureBuffer[0]);
+		gl.glBufferData(GL2.GL_ARRAY_BUFFER, 4*textureCoord.capacity(), textureCoord, GL2.GL_STATIC_DRAW);
 		//cleanup
 		gl.glDisableClientState(GL2.GL_VERTEX_ARRAY);
 		gl.glDisableClientState(GL2.GL_COLOR_ARRAY);
 		gl.glDisableClientState(GL2.GL_NORMAL_ARRAY);
+		gl.glDisableClientState(GL2.GL_TEXTURE_COORD_ARRAY);
 		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER,0);
+		points.clear();
+		colours.clear();
+		normals.clear();
+		textureCoord.clear();
 	}
 	public void draw(GL2 gl){
 		gl.glEnableClientState(GL2.GL_VERTEX_ARRAY);
 		gl.glEnableClientState(GL2.GL_COLOR_ARRAY);
 		gl.glEnableClientState(GL2.GL_NORMAL_ARRAY);
+		gl.glEnableClientState(GL2.GL_TEXTURE_COORD_ARRAY);
 		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER, colourBuffer[0]);
 		gl.glColorPointer(3, GL2.GL_FLOAT, 0, 0);
 		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER, vertexBuffer[0]);
 		gl.glVertexPointer(3, GL2.GL_FLOAT, 0, 0);
 		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER, normalBuffer[0]);
 		gl.glNormalPointer(GL2.GL_FLOAT, 0, 0);
+		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER, textureBuffer[0]);
+		gl.glTexCoordPointer(2,GL2.GL_FLOAT,0,0);
 		gl.glDrawArrays(GL2.GL_QUADS, 0, numVerticies);
 		gl.glDisableClientState(GL2.GL_COLOR_ARRAY);
 		gl.glDisableClientState(GL2.GL_VERTEX_ARRAY);
 		gl.glDisableClientState(GL2.GL_NORMAL_ARRAY);
+		gl.glDisableClientState(GL2.GL_TEXTURE_COORD_ARRAY);
 		gl.glBindBuffer(GL2.GL_ARRAY_BUFFER,0);
 	}
 	public void deleteVertexBuffer(GL2 gl){
 		gl.glDeleteBuffers(vertexBuffer.length, vertexBuffer, 0);
 		gl.glDeleteBuffers(colourBuffer.length,colourBuffer,0);
 		gl.glDeleteBuffers(normalBuffer.length,normalBuffer,0);
+		gl.glDeleteBuffers(textureBuffer.length,textureBuffer,0);
 	}
 	
 	public Vec3f calculateNormal(Vec3f pos1,Vec3f pos2,Vec3f pos3)
