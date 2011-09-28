@@ -6,8 +6,10 @@ public class Aggregator {
 	private DunedinMap dunedinMap;
 	private Sun sun;
 	private Time time;
-	private long [][] data;
-	
+	public long [][] totalData;
+	public boolean [][] stepData;
+	public long steps;//number of times the aggregator has been run
+	private boolean runOnce;
 	private static byte toSignedByte(int b){
 		int a = b;
 		return (byte) ((a>128?a-256:a) & 0xFF);
@@ -16,11 +18,33 @@ public class Aggregator {
 	
 	
 	public static void main(String [] args){
-		Aggregator a = new Aggregator(new Time(2011,0,1,0,0,0));
-		a.runForYear("output.csv");
-		
+		Aggregator a = new Aggregator(new Time(2011,9,1,12,0,0));
+		//a.runForYear("output.csv");
+		a.run();
+		a.writeTga(a.stepData);
 	}
-	public void writeTga(long [][] data){
+	public void run(){
+		if(time.getTimeSpeed()!=0  && sun.getElevation() > 0.0|| !runOnce){//ingore when the sun is down
+			runOnce = true;
+			for(int x = 0;x<dunedinMap.MapWidth;x++){
+			for(int y=0;y<dunedinMap.MapHeight;y++){
+				if(!rayLighting(x, y)){//if not in shadow
+					stepData[x][y] = false;
+					totalData[x][y]++;
+				}else{
+					stepData[x][y] = true;
+				}
+			}
+		}		
+		steps+=time.getTimeSpeed();
+		}
+	}
+	
+	public void update(){//update the aggregator ONLY USE IF NOT USING THE VIEWER
+		time.update(sun);
+		sun.updateNew(time);
+	}
+	public void writeTga(boolean [][] data){//writes out the shadows at a given time step
 		File f = new File("aggregator.tga");
 		BufferedOutputStream bis = null;
 		try{
@@ -38,7 +62,7 @@ public class Aggregator {
 			
 			for(int y=dunedinMap.MapHeight-1;y>=0;y--){
 				for(int x = 0;x<dunedinMap.MapWidth;x++){
-					int tmp = rayLighting(x, y) ? 0: 255;
+					int tmp = stepData[x][y] ? 0: 255;
 					byte []buf2 = new byte[3];
 					buf2[0] = toSignedByte(tmp);
 					buf2[1] = toSignedByte(tmp);
@@ -59,12 +83,46 @@ public class Aggregator {
 		}
 	}
 	
-	public void runForYear(String outputFileName){
-		for(int x = 0;x<dunedinMap.MapWidth;x++){ //zero the data probably unnecessary
-			for(int y=0;y<dunedinMap.MapHeight;y++){
-				data[x][y] = 0;
+	public void writeTga(long [][] data){//writes out the "heat" of an area aka the amount of sun it recieved
+		File f = new File("aggregator.tga");
+		BufferedOutputStream bis = null;
+		try{
+			bis = new BufferedOutputStream(new FileOutputStream(f));
+			byte []  buf = new byte[18];
+			buf[2] = 2;
+			buf[12] =  toSignedByte(dunedinMap.MapWidth &0xFF);
+			buf[13] =  toSignedByte(dunedinMap.MapWidth >> 8 &0xFF);
+			buf[14] =  toSignedByte(dunedinMap.MapHeight &0xFF);
+			buf[15] =  toSignedByte(dunedinMap.MapHeight >> 8 &0xFF);
+			buf[16] =  toSignedByte(0x18);
+			buf[17] =  toSignedByte(0x0);
+
+			bis.write(buf);
+			
+			for(int y=dunedinMap.MapHeight-1;y>=0;y--){
+				for(int x = 0;x<dunedinMap.MapWidth;x++){
+					int tmp = (int) (totalData[x][y] /steps);
+					byte []buf2 = new byte[3];
+					buf2[0] = toSignedByte(tmp);
+					buf2[1] = toSignedByte(tmp);
+					buf2[2] = toSignedByte(tmp);
+					bis.write(buf2);
+				}
+				System.out.println();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try {
+				bis.flush();
+				bis.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
+	}
+	
+	/*public void runForYear(String outputFileName){
 		while(time.getCalendar().get(Calendar.DAY_OF_MONTH) < 2){
 			for(int x = 0;x<dunedinMap.MapWidth;x++){
 				for(int y=0;y<dunedinMap.MapHeight;y++){
@@ -92,12 +150,14 @@ public class Aggregator {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-	}
+	}*/
 	public Aggregator(Time t){
 		time = t;
 		dunedinMap = new DunedinMap("dunedin.txt","terrain.tga","suburbs.tga");
 		sun = new Sun(time);
-		data = new long[dunedinMap.MapWidth][dunedinMap.MapHeight];
+		totalData = new long[dunedinMap.MapWidth][dunedinMap.MapHeight];
+		stepData = new boolean[dunedinMap.MapWidth][dunedinMap.MapHeight];
+		runOnce = false;
 	}
 	/**
 	 * 

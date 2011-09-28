@@ -19,6 +19,7 @@ public class Sun {
 	public Sun(Time t){
 		updateNew(t);
 	}
+
 	public void draw(GL2 gl){
 		gl.glPushMatrix();
 		gl.glColor3f(1.0f, 1.0f, 1.0f);
@@ -26,11 +27,10 @@ public class Sun {
     	glu.gluQuadricDrawStyle(quadratic, GLU.GLU_LINE);
     	glu.gluQuadricNormals(quadratic,GLU.GLU_SMOOTH);
     	gl.glTranslatef(x,y,z);
-    	lighting(gl);
 		glu.gluSphere(quadratic, 40f, 20, 20);
 		gl.glPopMatrix();
 	}
-	private void lighting(GL2 gl) {
+	public void lighting(GL2 gl) {
 		float [] pos = {x,y,z,0};
 		gl.glLightfv(GL2.GL_LIGHT0,GL2.GL_POSITION,pos,0);
 	}

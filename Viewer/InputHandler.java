@@ -63,6 +63,9 @@ public class InputHandler implements KeyListener,MouseListener,MouseMotionListen
 		case KeyEvent.VK_H: //go to signal hill!
 			camera.setPosition(965.81104f,42.77104f,269.20132f,-1.0f,236.0f);
 			break;
+		case KeyEvent.VK_M: //go to signal hill!
+			renderer.useShadowMapping = !renderer.useShadowMapping;
+			break;
 		}
 	}
 

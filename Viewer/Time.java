@@ -1,9 +1,10 @@
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
 public class Time {
 	GregorianCalendar calendar;
-	int timeSpeed = 60;
+	int timeSpeed = 0;
 	SunRiseAndSet sunTimes;
 
 	public GregorianCalendar getCalendar() {
@@ -20,27 +21,45 @@ public class Time {
 		calendar = new GregorianCalendar();//use current time
 		sunTimes = RedShift.Sunrise(this.getTime(),-45.86666666667, 170.5);
 	}
-	
+
 	public void setTimeSpeed(int d){
 		timeSpeed = d;
 	}
 	public int getTimeSpeed(){
 		return timeSpeed;
 	}
-	public void update(){
-		System.out.println("local time: " + this.getTime() + " sunset: " + sunTimes.sunSet);
-		if(this.getTime()  >= sunTimes.getSunSet()+1800){//give the program 30 minutes leeway
-			System.out.println("After sunset");
-			sunTimes = RedShift.Sunrise((this.getTime() + /*4320*/0),-45.86666666667, 170.5);
-			System.out.println(this.toString());
-			//System.out.println(sunRise);
-			calendar.setTimeInMillis((long)(sunTimes.getSunRise()-1800) * 1000);
-			System.out.println(this.toString());
-			//calendar.setTimeInMillis(((long) RedShift.Sunrise(this.getTime()+  (0), -45.86666666667, 170.5)  * 1000));
+	public void update(Sun sun){
+		if(sun.getElevation() < 0.0){//in the afternoon
+			if(calendar.get(Calendar.HOUR_OF_DAY) > 12){
+				calendar.add(GregorianCalendar.HOUR, 6);
+				while(sun.getElevation() <0.0){
+					calendar.add(GregorianCalendar.MINUTE, 1);
+					sun.updateNew(this);
+				}
+			}else{
+				calendar.add(GregorianCalendar.HOUR, -6);
+				while(sun.getElevation() <0.0){
+					calendar.add(GregorianCalendar.MINUTE, -1);
+					sun.updateNew(this);
+				}
+			}
 		}else{
 			calendar.add(GregorianCalendar.SECOND, (int) (1*timeSpeed));
 		}
-		
+
+		//		//System.out.println("local time: " + this.getTime() + " sunset: " + sunTimes.sunSet);
+		//		if(this.getTime()  >= sunTimes.getSunSet()+1800){//give the program 30 minutes leeway
+		//			System.out.println("After sunset");
+		//			sunTimes = RedShift.Sunrise((this.getTime() + /*4320*/0),-45.86666666667, 170.5);
+		//			System.out.println(this.toString());
+		//			//System.out.println(sunRise);
+		//			calendar.setTimeInMillis((long)(sunTimes.getSunRise()-1800) * 1000);
+		//			System.out.println(this.toString());
+		//			//calendar.setTimeInMillis(((long) RedShift.Sunrise(this.getTime()+  (0), -45.86666666667, 170.5)  * 1000));
+		//		}else{
+		//			calendar.add(GregorianCalendar.SECOND, (int) (1*timeSpeed));
+		//		}
+
 	}
 	public String toString(){
 		return calendar.getTime().toString();
