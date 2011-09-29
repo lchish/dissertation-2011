@@ -13,9 +13,8 @@ public class DunedinMap {
 	private int [] vertexBuffer,colourBuffer,normalBuffer,textureBuffer;
 	private int numVerticies;
 	public float [][] Map;
-	private float heightScale = 10;
 	public BufferedImage terrain, suburbs;
-
+	static public final float HEIGHT_SCALE = 20f;
 	public DunedinMap(String heightData,String terrainData,String suburbData){
 		try {
 			Map = new float[MapWidth][MapHeight];
@@ -28,10 +27,9 @@ public class DunedinMap {
 				for(int x = 0;line.hasNextFloat() && x <MapWidth;x++){
 					float tmp = line.nextFloat();
 					if((terrain.getRGB(x,y) & 0xFF) == 0xFF){
-						//in water
 						Map[x][y] = 0f;
 					}else{
-						Map[x][y] = tmp/heightScale;
+						Map[x][y] = tmp/HEIGHT_SCALE;
 					}
 				}
 			}
@@ -45,6 +43,12 @@ public class DunedinMap {
 		createVertexBuffer(gl);
 	}
 	
+	public boolean inWater(int x,int y){
+		return (terrain.getRGB(x, y) &0xFF) == 0xFF;
+	}
+	public boolean inSuburb(int x,int y){
+		return ((terrain.getRGB(x, y)>>16) &0xFF) == 0xFF;
+	}
 	public static int [] getPixelAsFloat(int pixel) {
 		int [] ret = new int[4];
 	    ret[0] = (pixel >> 16) & 0xff;//red

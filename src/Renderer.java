@@ -32,14 +32,14 @@ public class Renderer implements GLEventListener{
 	private int [] aggregatorTextureID = new int[1];
 	private int shadowMapUniform,aggregatorShadowMapUniform;
 	private int shaderId,shaderIdAggregator;
-	public static float scale = 0.1f;
+	//public static float scale = 0.1f;
 	public boolean wireframe = false,useShadowMapping = true;
 	public static final int RENDER_WIDTH = 1024,RENDER_HEIGHT = 768,SHADOW_MAP_RATIO = 8;
 	public Overlay overlay;
 	private Time time;
 	//private Texture aggregatorTexture;
 	private Aggregator aggregator;
-	private boolean useAggregator = false,drawAggregatorShadows=false;
+	private boolean useAggregator = true,drawAggregatorShadows=true;
 	ByteBuffer textureBuffer;
 	
 	
@@ -48,7 +48,7 @@ public class Renderer implements GLEventListener{
 		sun = new Sun(time);
 		camera = new Camera();
 		this.time = time;
-		aggregator = new Aggregator(this.time);
+		aggregator = new Aggregator(this.time,this.dunedinMap,this.sun);
 		textureBuffer = Buffers.newDirectByteBuffer((dunedinMap.MapHeight-1)*(dunedinMap.MapWidth-1)*3);
 	}
 	public void update(){
@@ -181,7 +181,9 @@ public class Renderer implements GLEventListener{
 			gl.glPolygonMode( GL2.GL_FRONT_AND_BACK, GL2.GL_FILL );
 		sun.lighting(gl);
 		dunedinMap.draw(gl);
+		sun.draw(gl);
 		drawData(gl);
+		
 	}
 
 	@Override
@@ -288,25 +290,6 @@ public class Renderer implements GLEventListener{
 		shaderIdAggregator = shaderProgramAggregator;
 	}
 
-	/*private void textureFromAggregatorOld(GL2 gl){
-		int width = dunedinMap.MapWidth, height =dunedinMap.MapHeight;
-		
-		gl.glBindTexture(GL2.GL_TEXTURE_2D, aggregatorTextureID[0]);
-		
-		int numTexels = width * height;
-		IntBuffer textureBuffer = Buffers.newDirectIntBuffer(numTexels*3);
-		for(int x = 0;x<dunedinMap.MapWidth;x++){
-			for(int y=0;y<dunedinMap.MapHeight;y++){
-				//System.out.println(aggregator.stepData[x][y]?0:255);
-				textureBuffer.put(aggregator.stepData[x][y]?0:1);
-				textureBuffer.put(aggregator.stepData[x][y]?0:1);
-				textureBuffer.put(aggregator.stepData[x][y]?0:1);
-			}
-		}
-		textureBuffer.rewind();
-		gl.glTexImage2D(GL2.GL_TEXTURE_2D,0,GL2.GL_RGB,width,height,0,GL2.GL_RGB,GL2.GL_INT,textureBuffer);
-		//glu.gluBuild2DMipmaps( GL2.GL_TEXTURE_2D, 3, width, height,GL2.GL_RGB, GL2.GL_INT, textureBuffer);
-	}*/
 	private void textureFromAggregator(GL2 gl){
 		int width = dunedinMap.MapWidth-1, height =dunedinMap.MapHeight-1;//have to reduce it by 1 to make the numbers even
 		
@@ -316,14 +299,19 @@ public class Renderer implements GLEventListener{
 		gl.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_MAG_FILTER, GL2.GL_LINEAR);
 		gl.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_MIN_FILTER, GL2.GL_LINEAR);
 		
-		//int size = width*height*3;
-		//textureBuffer = Buffers.newDirectByteBuffer(size);
 		if(drawAggregatorShadows || aggregator.steps == 0){
 			for(int y=0;y<height;y++){
 				for(int x = 0;x<width;x++){
-					for(int z = 0 ;z<3;z++){
+					if(!dunedinMap.inWater(x, y)){
 						textureBuffer.put((byte) (aggregator.stepData[x][y]? 0:0xFF));
+						textureBuffer.put((byte) (aggregator.stepData[x][y]? 0:0xFF));
+						textureBuffer.put((byte) (aggregator.stepData[x][y]? 0:0xFF));
+					}else{
+						textureBuffer.put((byte)255);
+						textureBuffer.put((byte)0);
+						textureBuffer.put((byte)0);
 					}
+
 				}
 			}
 		}else{
@@ -340,21 +328,9 @@ public class Renderer implements GLEventListener{
 		textureBuffer.clear();
 	}
 	
-	/*public void createAggregatorTexture(GL2 gl){
-		//loadTextureTGA("aggregator.tga", false, gl);
-		try {
-			aggregatorTexture = TextureIO.newTexture(new File("aggregator.tga"),false);
-		} catch (GLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
-	
 	@Override
 	public void init(GLAutoDrawable drawable) {
 		GL2 gl = drawable.getGL().getGL2();
-		//createAggregatorTexture(gl);
 		generateShadowFBO(gl);
 		initShaders(gl);
 		gl.glGenTextures(1, aggregatorTextureID, 0);
