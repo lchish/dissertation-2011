@@ -47,19 +47,6 @@ public class Time {
 			calendar.add(GregorianCalendar.SECOND, (int) (1*timeSpeed));
 		}
 
-		//		//System.out.println("local time: " + this.getTime() + " sunset: " + sunTimes.sunSet);
-		//		if(this.getTime()  >= sunTimes.getSunSet()+1800){//give the program 30 minutes leeway
-		//			System.out.println("After sunset");
-		//			sunTimes = RedShift.Sunrise((this.getTime() + /*4320*/0),-45.86666666667, 170.5);
-		//			System.out.println(this.toString());
-		//			//System.out.println(sunRise);
-		//			calendar.setTimeInMillis((long)(sunTimes.getSunRise()-1800) * 1000);
-		//			System.out.println(this.toString());
-		//			//calendar.setTimeInMillis(((long) RedShift.Sunrise(this.getTime()+  (0), -45.86666666667, 170.5)  * 1000));
-		//		}else{
-		//			calendar.add(GregorianCalendar.SECOND, (int) (1*timeSpeed));
-		//		}
-
 	}
 	public String toString(){
 		return calendar.getTime().toString();
