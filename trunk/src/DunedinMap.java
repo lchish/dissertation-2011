@@ -47,7 +47,7 @@ public class DunedinMap {
 		return (terrain.getRGB(x, y) &0xFF) == 0xFF;
 	}
 	public boolean inSuburb(int x,int y){
-		return ((terrain.getRGB(x, y)>>16) &0xFF) == 0xFF;
+		return (terrain.getRGB(x, y) != 0);
 	}
 	public static int [] getPixelAsFloat(int pixel) {
 		int [] ret = new int[4];
