@@ -57,24 +57,36 @@ A digital elevation model of Dunedin and a mathematical model of the sun's posit
 The height data for Dunedin was collected from the surveying department of the University of Otago. The data contains a map with a width of 1237 points and a height of 881 points and covers most of general Dunedin from South Taieri to the top of Pine Hill. The data is encoded as a 1237x881 text file of decimal pointed numbers that represent the height above sea level of that point. The resolution of the data is 20 metres between points. There are areas where the data is less accurate, such as the hills West of Leith Valley and around Cape Saunders, and the water.
 
 \begin{figure}
+\includegraphics[scale=0.4]{terrain.png}
 \caption{Water texture}
 \label{overlaytexture}
 \end{figure}
-To work around the inaccuracies in the water level an image was generated with the areas of water in the map are coloured blue. Generating this texture was also useful when runnning the aggregator because the water is already clearly marked on the map and thus areas in the water can be safely ignored to get a speed bonus. 
+To work around the inaccuracies in the water level an image was generated \ref{overlaytexture} with the areas of water coloured blue and the areas of land that the aggregator is not looking at coloured black. The image is overlayed on the height data map with a 1:1 mapping to show what areas of land are in water. Areas of land are clamped to a height of 0.1 if they are within water. 
+
+Before a water overlay texture was being used any land below zero metres was assumed to be below sea level. Doing this caused problems in areas of reclaimed land such as South Dunedin and the harbour area being thought of as below sea level. 
+
+ Generating this image was also useful when running the aggregator because the water is already clearly marked on the map and thus areas in the water can be safely ignored to get a speed bonus. 
 
 \subsection{Accuracy}
 To test the accuracy of the height data a global positioning system (GPS) was to be used to check the accuracy of the height points however this turned out to be infeasible because the accuracy of the GPS's height data was far lower than expected and to inaccurate to be included in the project. A GPS is rated to be accurate to approximately +/- 15 metres 95\% of the time\cite{gpsaltitude}. The inaccuracies were observed when standing at sea level with a GPS and getting results approximately 10 metres higher than the current position.
 
-The best way to confirm the accuracy of the height data would be to compare it to other geographical data sources. Before going to the surveying department for the height information other sources were tried. The Shuttle Radio Topography Mission (SRTM)\cite{srtm} was a near-global scale project by NASA to generate topographical maps and includes all of New Zealand at a resolution of 30 metres. Unfortunately there was not enough time to write code to compare the height data from the surveying department to any other sources.
+The best way to confirm the accuracy of the height data would be to compare it to other geographical data sources. Before going to the surveying department for the height information other sources were tried. The Shuttle Radio Topography Mission (SRTM)\cite{srtm} was a near-global scale project by NASA to generate topographical maps and includes all of New Zealand at a resolution of 30 metres. A old version of ARC GIS was provided by Geoff Wyvill containing topographical information about New Zealand, unfortunately the software to read the topographical maps was quite old and could not be run on any of the operating systems there was access to in the department.
+
+\subsection{Future Work}
+Unfortunately time constraints meant that there was not enough time to explore these methods of collecting height data and compare them to the height data.
+ Given more time these data sources could be thoroughly explored and a larger collection of geographical data collected and utilised within the project, allowing the user to examine more cities than Dunedin.
 
 \section{Sun}
+To generate shadows over the representation given of Dunedin the sun's position has to be calculated accurately using the current time and geographical position.
 
 
-Calculations of the sunset and sunrise times taken from \url{http://users.electromagnetic.net/bu/astro/sunrise-set.php} which is similar to the Wikipedia page on the sun. Calculations on that site were taken from here \url{http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html}
 \subsection{Calculating the Position of the Sun}
-To calculate the position of the sun 
+To calculate the position of the sun code from the RedShift project\cite{redshift} was used to ensure that the code had been previously tested. Code from other projects were examined, such as the solar positioning libraries for Java\cite{javasunlib} however the algorithms used in this library, the PSA\cite{psa} and SPA\cite{spa} algorithms, have the unfortunate downside that they do not work for areas in the Southern Hemisphere and modifying the algorithms used in their papers are outside the scope of the project.
 
+The code modified from the RedShift library are the solar.c and solar.h files, which are taken from javascript code by U.S. Department of Commerce, National Oceanic & Atmospheric Administration\cite{usnoaa} and is based on equations from Astronomical Algorithms\cite{astronomicalalgorithms}.
 
+\subsection{Calculating the Sunrise and Sunset}
+Calculations of the sunset and sunrise times taken from \cite{sunrise} 
 \subsection{Sun Accuracy}
 \begin{figure}
 \caption{Device used to accurately calculate the position of the sun}
