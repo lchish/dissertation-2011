@@ -100,9 +100,11 @@ The accuracy of the sun was tested by comparing the results from the algorithms 
 \includegraphics[scale=0.4]{viewer.png}
 \caption{A screenshot of the viewer looking down at Dunedin}
 \end{figure}\note{Good to see the screenshot! :-) Can the brightness/contrast be adjusted? It is very dark on my system.}
-The viewer allows the user to view how the sun moves across the sky in a real-time 3D display...
+The viewer is an interactive three-dimensional simulator of the Sun moving over Dunedin. It allows the user to view shadows cast by the sun over the varying landscape. It exposes the ability to run in two different modes; shadow-mapping mode, where OpenGL shadow maps are used to generate shadows, and aggregator shadowing mode, where the shadow data from the aggregator is used to calculate shadows. This chapter will focus mostly on the OpenGL and shadow mapping side of the viewer.
+
 \section{Drawing the elevation data}
-The elevation data is drawn using OpenGL quads...
+Geographical height data is drawn by the viewer using OpenGL. After the height data has been gathered by the program OpenGL buffer objects are created to store the vertex position,colour, texture coordinates and vector normals. Buffer objects allow sending the data to be drawn directly to the graphics cards local memory where it can be redrawn and updated quickly without unnecessary resending. Due to the large number vertices present in the height data and the static nature of the data using buffers to store the data lowers the number of graphics hardware calls significantly in comparison to using the fixed function pipeline.
+
 \section{Shadows}
 Shadows are done on the graphics hardware using shadow maps...
 \section{Usage}
