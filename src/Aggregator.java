@@ -18,18 +18,19 @@ public class Aggregator {
 		long numberOfTimes = 1000,runningTotal = 0;
 		Time time = new Time(2011,9,1,8,0,0);
 		Aggregator a = new Aggregator(time,new DunedinMap("dunedin.txt","terrain.tga","suburbs.tga"),new Sun(time));
-		time.setTimeSpeed(60);
+		time.setTimeSpeed(36);
 		for(int i=0;i<numberOfTimes;i++){
 			long start = System.currentTimeMillis();
 			a.runOptimised();
 			long end = System.currentTimeMillis();
 			System.out.println(end - start);
 			runningTotal += end-start;
-			System.out.println(time.getCalendar());
+			System.out.println(time.getCalendar().getTime());
+			a.update();
 		}
 		double avg = (double)runningTotal / (double)numberOfTimes;
 		System.out.println(avg);
-		a.update();
+		
 	}
 	public void run(){
 		if(time.getTimeSpeed()!=0  && sun.getElevation() > 0.0|| !runOnce){
