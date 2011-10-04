@@ -14,16 +14,22 @@ public class Aggregator {
 		return (byte) ((a>128?a-256:a) & 0xFF);
 	}
 
-
-
 	public static void main(String [] args){
-		Time time = new Time(2011,9,1,17,0,0);
+		long numberOfTimes = 1000,runningTotal = 0;
+		Time time = new Time(2011,9,1,8,0,0);
 		Aggregator a = new Aggregator(time,new DunedinMap("dunedin.txt","terrain.tga","suburbs.tga"),new Sun(time));
-		//a.runForYear("output.csv");
-		//a.run();
-		a.runOptimised();
-		a.writeTga(a.stepData,"aggregator.tga");
-		//a.writeCSV(a.stepData,"out.csv");
+		time.setTimeSpeed(60);
+		for(int i=0;i<numberOfTimes;i++){
+			long start = System.currentTimeMillis();
+			a.runOptimised();
+			long end = System.currentTimeMillis();
+			System.out.println(end - start);
+			runningTotal += end-start;
+			System.out.println(time.getCalendar());
+		}
+		double avg = (double)runningTotal / (double)numberOfTimes;
+		System.out.println(avg);
+		a.update();
 	}
 	public void run(){
 		if(time.getTimeSpeed()!=0  && sun.getElevation() > 0.0|| !runOnce){
@@ -37,15 +43,15 @@ public class Aggregator {
 	public void runOptimised(){
 		if(time.getTimeSpeed()!=0  && sun.getElevation() > 0.0|| !runOnce){
 			runOnce = true;
-			int stepSize  = 10,x,y;
+			int stepSize  = 20,x,y;
 			for(x=0;x+stepSize<dunedinMap.getWidth();x+= stepSize){
 				for(y=0;y+stepSize<dunedinMap.getHeight();y+=stepSize){
 					rayLightingOptimised(x, y, stepSize, stepSize);
 				}
 				//finish off the final squares
-				//rayLightingNonOptimised(x, y, stepSize, dunedinMap.getHeight()-y);
+				rayLightingNonOptimised(x, y, stepSize, dunedinMap.getHeight()-y);
 			}
-			//rayLightingNonOptimised(x, 0, dunedinMap.getWidth()-x,dunedinMap.getHeight());
+			rayLightingNonOptimised(x, 0, dunedinMap.getWidth()-x,dunedinMap.getHeight());
 			steps+=time.getTimeSpeed();
 		}
 	}
@@ -269,6 +275,7 @@ public class Aggregator {
 	public boolean rayLighting(int x,int z){
 		Vec3f direction= sun.getDirectionUnitVector();
 		double initialPointHeight = dunedinMap.getMapHeight(x, z);
+		double dx = 1/direction.x,dz =  1/direction.z;
 		float tdx=1/direction.x,tdz=1/direction.z;//get the ball rolling
 		int xPos=x,zPos=z;
 		while(xPos <dunedinMap.getWidth()&&xPos>=0 && zPos<dunedinMap.getHeight() && zPos >=0){
@@ -276,11 +283,11 @@ public class Aggregator {
 				return true;
 			if(Math.abs(tdx)<Math.abs(tdz)){// a move in x is less than a move in z
 				//step along x
-				float dx = 1/direction.x;
+				//float dx = ;
 				xPos += tdx> 0 ? 1 : -1;
 				tdx+=dx;
 			}else{// tdz<tdx
-				float dz = 1/direction.z;
+				//float dz = ;
 				zPos += tdz> 0 ? 1 : -1;
 				tdz+=dz;
 			}
