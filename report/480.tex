@@ -82,7 +82,17 @@ To generate shadows over the representation given of Dunedin the sun's position 
 \subsection{Calculating the Position of the Sun}
 To calculate the position of the sun code from the RedShift project\cite{redshift} was used to ensure that the code had been previously tested. Code from other projects were examined, such as the solar positioning libraries for Java\cite{javasunlib} however the algorithms used in this library, the PSA\cite{psa} and SPA\cite{spa} algorithms, have the unfortunate downside that they do not work for areas in the Southern Hemisphere and modifying the algorithms used in their papers are outside the scope of the project.
 
-The code modified from the RedShift library are the solar.c and solar.h files, which are taken from javascript code by U.S. Department of Commerce, National Oceanic & Atmospheric Administration\cite{usnoaa} and is based on equations from Astronomical Algorithms\cite{astronomicalalgorithms}. Using RedShift's implementation of the solar position calculations ported easily into the Java programming language and the results from the version used in the project are very similar to the results from RedShift.
+To calculate the position of the sun the current Julian Date, solar declination and hour angle must be calculated. The Julian date is calculated by converting the current system UNIX time (seconds past January 1st 1970) into the current Julian Date (days since January 1, 4713 BC).
+The hour angle is the angle between the plane of the Earth and the plane of the sun at a given time and is zero when the sun is directly above the Earth (solar noon). Calculating the hour angle can be done using the current longitude and Julian time. Solar declination is a measure of how many degrees North or South of the equator that the sun is when viewed from the centre of the earth and can be calculated by the current time. Using these calculations and the current latitude the sun's current azimuth and elevation can be easily computed.
+Unsure as to how descriptive my definition of these should be writing out all of the maths would be far to difficult. 
+
+The code modified from the RedShift library are the solar.c and solar.h files, which are taken from javascript code by U.S. Department of Commerce, National Oceanic & Atmospheric Administration\cite{usnoaa} and is based on equations from Astronomical Algorithms\cite{astronomicalalgorithms}. 
+
+Redshift is only capable of calculating the altitude of the sun so many (6 to be exact) different calculations for the azimuth were tried from multiple different sources. The most accurate calculation for finding the solar azimuth was found at one of the University of Southern California's Architecture Site\cite{solarazi}. Using the calculations already performed by Redshift to calculate the solar declination and hour angle it was possible to fit this into the code with little effort.
+
+Using RedShift's implementation of the solar position calculations ported easily into the Java programming language and the results from the version used in the project are very similar to the results from RedShift.
+
+Daylight savings time is automatically handled by using Java's built in Calendar class
 
 Java automatically handles daylight saving time in its Time class
 
