@@ -29,72 +29,69 @@ This is the paper's abstract \ldots
 \listoffigures\
 \listofalgorithms
 \chapter{Introduction}
-The city of Dunedin is well known for being a dark and cold city because of the hills surrounding the centre of the city that shade large areas in the winter months. This project set out to discover the amount of sunlight Dunedin receives and present the data in a user friendly manner.
+The city of Dunedin is well known for being a dark and cold city because of the hills surrounding the centre of the city that shade large areas in the winter months. This project set out to discover the amount of sunlight Dunedin receives and present the data in a user friendly manner.\\
 
 \section{Goals}
-The goals of this project were research and implement a sunlight projection model for the city of Dunedin. There are two parts; an interactive three-dimensional display to show point in time distribution of sunlight over Dunedin and a data aggregator to augment the display with computed measures of sunlight coverage over time ranges.
+The goals of this project were research and implement a sunlight projection model for the city of Dunedin. There are two parts; an interactive three-dimensional display to show point in time distribution of sunlight over Dunedin and a data aggregator to augment the display with computed measures of sunlight coverage over time ranges.\\
 
 \section{Chapter outline}
-Chapter two focuses on how physical data was gathered from the environment, the methods used to convert them into a representation usable for the project and the accuracy that was obtained in these measurements. Chapter three looks at the interactive three-dimensional viewer built to display the distribution of sunlight over Dunedin in real-time and its implementation using OpenGL and JOGL. Chapter four is about the data aggregator, which accurately calculates the amount of sunlight an area receives, how the data it calculates can be explored and the results generated.
+Chapter two focuses on how physical data was gathered from the environment, the methods used to convert them into a representation usable for the project and the accuracy that was obtained in these measurements. Chapter three looks at the interactive three-dimensional viewer built to display the distribution of sunlight over Dunedin in real-time and its implementation using OpenGL and JOGL. Chapter four is about the data aggregator, which accurately calculates the amount of sunlight an area receives, how the data it calculates can be explored and the results generated.\\
 
 \section{Background Information}
 \subsection{OpenGL and JOGL} 
-To create the viewer and allow it to be used in an interactive method the Java OpenGL (JOGL)\cite{JOGL} libraries are used. JOGL is a wrapper library that exports the OpenGL application programming interface (API) to the Java programming language. OpenGL or Open Graphics Library is a cross platform API for writing applications that use two and three dimensional computer graphics. The project uses version 2.0 of the OpenGL libraries for access to programmable shaders and buffer objects and will be able to run on any graphics hardware that supports OpenGL 2.0.
+To create the viewer and allow it to be used in an interactive method the Java OpenGL (JOGL)\cite{JOGL} libraries are used. JOGL is a wrapper library that exports the OpenGL application programming interface (API) to the Java programming language. OpenGL or Open Graphics Library is a cross platform API for writing applications that use two and three dimensional computer graphics. The project uses version 2.0 of the OpenGL libraries for access to programmable shaders and buffer objects and will be able to run on any graphics hardware that supports OpenGL 2.0.\\
 
 \note{Does `Background' normally sit in the introduction chapter? In a PhD thesis it would usually be chapter two. The problem with having it here is that the chapter outline comes after it. In most theses I've seen (these are not 480 project reports though) only the introduction text would come before the chapter outline. Hmm ok I've moved it to be after the chapter outline. I don't think a whole chapter could be taken up with background information}
 
 
 \chapter{Physical Data}
-A digital elevation model of Dunedin and a mathematical model of the sun's position make up the two main physical data sets required to show how shadows are cast.
+A digital elevation model of Dunedin and a mathematical model of the sun's position make up the two main physical data sets required to show how shadows are cast.\\
 
 \section{Elevation Data}
 \begin{figure}
-\includegraphichs[scale=0.4]{height.png}
+\includegraphics[scale=0.25]{height.png}
 \caption{A Height Map generated from the data with low points dark and high points bright}
 \label{elevation}
 \end{figure}
 
-The height data for Dunedin was collected from the surveying department of the University of Otago. The data contains a map with a width of 1237 points and a height of 881 points and covers most of general Dunedin from South Taieri to the top of Pine Hill. The data is encoded as a 1237x881 text file of decimal pointed numbers that represent the height above sea level in metres of that point. The resolution of the data is 20 metres between points. 
+The height data for Dunedin was collected from the surveying department of the University of Otago. The data contains a map with a width of 1237 points and a height of 881 points and covers most of general Dunedin from South Taieri to the top of Pine Hill. The data is encoded as a 1237x881 text file of decimal pointed numbers that represent the height above sea level in metres of that point. The resolution of the data is 20 metres between points.\\
 
-From~\ref{elevation} it can be seen that there are areas that are less accurate where the data is approximated and smoothed out, such as the hills west of the Leith Valley and around Cape Saunders. The definition between what is in water and what is not also gets complicated when dealing with areas of reclaimed land like South Dunedin and the height data does not contain a fixed value for the water height.
+From~\ref{elevation} it can be seen that there are areas that are less accurate where the data is approximated and smoothed out, such as the hills west of the Leith Valley and around Cape Saunders. The definition between what is in water and what is not also gets complicated when dealing with areas of reclaimed land like South Dunedin and the height data does not contain a fixed value for the water height.\\
 
 \begin{figure}
-\includegraphics[scale=0.4]{terrain.png}
+\includegraphics[scale=0.25]{terrain.png}
 \caption{Water texture}
 \label{overlaytexture}
 \end{figure}
-To work around the lack of definition of what is at water level and what is not, an image was generated (see~\ref{overlaytexture}) with the areas of water coloured a strong blue (RGB 0,0,255). The image is overlayed on the height data map when being used in the viewer with a 1:1 mapping of height points to image pixels to show what areas of land are in water. The areas of the height data that fall in the water are clamped to a height of 0.1 because the shape and depth of the ocean floor is of no use to the project.
+To work around the lack of definition of what is at water level and what is not, an image was generated (see~\ref{overlaytexture}) with the areas of water coloured a strong blue (RGB 0,0,255). The image is overlayed on the height data map when being used in the viewer with a 1:1 mapping of height points to image pixels to show what areas of land are in water. The areas of the height data that fall in the water are clamped to a height of 0.1 because the shape and depth of the ocean floor is of no use to the project.\\
 
 
 \subsection{Accuracy}
-To test the accuracy of the height data a global positioning system (GPS) was to be used to check the accuracy of the height points however this turned out to be infeasible because the accuracy of the GPS's height data was far lower than expected and to inaccurate to be included in the project. A GPS is rated to be accurate to approximately +/- 15 metres 95\% of the time\cite{gpsaltitude}. The inaccuracies were observed when standing at sea level with a GPS and getting results approximately 10 metres higher than the current position.
+To test the accuracy of the height data a global positioning system (GPS) was to be used to check the accuracy of the height points however this turned out to be infeasible because the accuracy of the GPS's height data was far lower than expected and to inaccurate to be included in the project. A GPS is rated to be accurate to approximately +/- 15 metres 95\% of the time\cite{gpsaltitude}. The inaccuracies were observed when standing at sea level with a GPS and getting results approximately 10 metres higher than the current position.\\
 
-The best way to confirm the accuracy of the height data would be to compare it to other geographical data sources. Before going to the surveying department for the height information other sources were tried. The Shuttle Radio Topography Mission (SRTM)\cite{srtm} was a near-global scale project by NASA to generate topographical maps and includes all of New Zealand at a resolution of 30 metres. A old version of ARC GIS was provided by Geoff Wyvill containing topographical information about New Zealand, unfortunately the software to read the topographical maps was quite old and could not be run on any of the operating systems there was access to in the department.
+The best way to confirm the accuracy of the height data would be to compare it to other geographical data sources. Before going to the surveying department for the height information other sources were tried. The Shuttle Radio Topography Mission (SRTM)\cite{srtm} was a near-global scale project by NASA to generate topographical maps and includes all of New Zealand at a resolution of 30 metres. A old version of ARC GIS was provided by Geoff Wyvill containing topographical information about New Zealand, unfortunately the software to read the topographical maps was quite old and could not be run on any of the operating systems there was access to in the department.\\
 
 \subsection{Future Work}
 Unfortunately time constraints meant that there was not enough time to explore these methods of collecting height data and compare them to the height data.
- Given more time these data sources could be thoroughly explored and a larger collection of geographical data collected and utilised within the project, allowing the user to examine more cities than Dunedin.
+ Given more time these data sources could be thoroughly explored and a larger collection of geographical data collected and utilised within the project, allowing the user to examine more cities than Dunedin.\\
 
 \section{Sun}
-To generate shadows over the representation given of Dunedin the sun's position has to be calculated accurately using the current time and geographical position.
+To generate shadows over the representation given of Dunedin the sun's position has to be calculated accurately using the current time and geographical position.\\
 
 
 \subsection{Calculating the Position of the Sun}
-To calculate the position of the sun code from the RedShift project\cite{redshift} was used to ensure that the code had been previously tested. Code from other projects were examined, such as the solar positioning libraries for Java\cite{javasunlib} however the algorithms used in this library, the PSA\cite{psa} and SPA\cite{spa} algorithms, have the unfortunate downside that they do not work for areas in the Southern Hemisphere and modifying the algorithms used in their papers are outside the scope of the project.
+To calculate the position of the sun code from the RedShift project\cite{redshift} was used to ensure that the code had been previously tested. Code from other projects were examined, such as the solar positioning libraries for Java\cite{javasunlib} however the algorithms used in this library, the PSA\cite{psa} and SPA\cite{spa} algorithms, have the unfortunate downside that they do not work for areas in the Southern Hemisphere and modifying the algorithms used in their papers are outside the scope of the project.\\
 
 To calculate the position of the sun the current Julian Date, solar declination and hour angle must be calculated. The Julian date is calculated by converting the current system UNIX time (seconds past January 1st 1970) into the current Julian Date (days since January 1, 4713 BC).
-The hour angle is the angle between the plane of the Earth and the plane of the sun at a given time and is zero when the sun is directly above the Earth (solar noon). Calculating the hour angle can be done using the current longitude and Julian time. Solar declination is a measure of how many degrees North or South of the equator that the sun is when viewed from the centre of the earth and can be calculated by the current time. Using these calculations and the current latitude the sun's current azimuth and elevation can be easily computed.
-Unsure as to how descriptive my definition of these should be writing out all of the maths would be far to difficult. 
+The hour angle is the angle between the plane of the Earth and the plane of the sun at a given time and is zero when the sun is directly above the Earth (solar noon). Calculating the hour angle can be done using the current longitude and Julian time. Solar declination is a measure of how many degrees North or South of the equator that the sun is when viewed from the centre of the earth and can be calculated by the current time. Using these calculations and the current latitude the sun's current azimuth and elevation can be easily computed.\\
 
-The code modified from the RedShift library are the solar.c and solar.h files, which are taken from javascript code by U.S. Department of Commerce, National Oceanic & Atmospheric Administration\cite{usnoaa} and is based on equations from Astronomical Algorithms\cite{astronomicalalgorithms}. 
+The code modified from the RedShift library are the solar.c and solar.h files, which are taken from javascript code by U.S. Department of Commerce, National Oceanic \& Atmospheric Administration\cite{usnoaa} and is based on equations from Astronomical Algorithms\cite{astronomicalalgorithms}. \\
 
-Redshift is only capable of calculating the altitude of the sun so many (6 to be exact) different calculations for the azimuth were tried from multiple different sources. The most accurate calculation for finding the solar azimuth was found at one of the University of Southern California's Architecture Site\cite{solarazi}. Using the calculations already performed by Redshift to calculate the solar declination and hour angle it was possible to fit this into the code with little effort.
+Redshift is only capable of calculating the altitude of the sun so many (6 to be exact) different calculations for the azimuth were tried from multiple different sources. The most accurate calculation for finding the solar azimuth was found at one of the University of Southern California's Architecture Site\cite{solarazi}. Using the calculations already performed by Redshift to calculate the solar declination and hour angle it was possible to fit this into the code with little effort.\\
 
-Using RedShift's implementation of the solar position calculations ported easily into the Java programming language and the results from the version used in the project are very similar to the results from RedShift.
 
-Daylight savings time is automatically handled by using Java's built in Calendar class
-
-Java automatically handles daylight saving time in its Time class
+\subsubsection{Time}
+In calculating the position of the sun the current time must be known. Java's built in GregorianCalendar class was used to keep track of the current date/time, handle changes in daylight savings time and update the time. The method getSystemTimeMillis() was used when calculating the position of the sun because it returns the current UNIX time in milliseconds.
 
 \subsection{Calculating the Sunrise and Sunset}
 Calculations of the sunset and sunrise times taken from \cite{sunrise} 
@@ -106,7 +103,7 @@ Calculations of the sunset and sunrise times taken from \cite{sunrise}
 \end{figure}
 
 \begin{table}
-\begin{tabular}{ | l | l | l | l  | 1 |}
+\begin{tabular}{ | l | l | l | l  | l |}
 \hline
 Date Time & Sun Azimuth Website & Sun Azimuth Project & Sun Elevation Website & Sun Elevation Project\\ \hline
 09:30 January 1st 2011 & 87.94462 & 87.9465 & 35.06 & 35.039\\ \hline
@@ -120,22 +117,22 @@ Date Time & Sun Azimuth Website & Sun Azimuth Project & Sun Elevation Website & 
 \end{table}
 
 
-The accuracy of the sun was tested by comparing the results from the algorithms used in the project and by other sun position calculators and by creating a device to calculate the position of the sun at the current time. Using the solar position calculator from satellite-caculations.com\cite{solarpos} the solar altitude and azimuth at 15:19 on October 4th is 321.1353 and 41.72 degrees(including atmospheric refraction). Observing~\ref{websun} it can be seen that the results generated by the sun code in the project accurately resembles that generated by other code, even without taking atmospheric refraction into account.
+The accuracy of the sun was tested by comparing the results from the algorithms used in the project and by other sun position calculators and by creating a device to calculate the position of the sun at the current time. Using the solar position calculator from satellite-caculations.com\cite{solarpos} the solar altitude and azimuth at 15:19 on October 4th is 321.1353 and 41.72 degrees(including atmospheric refraction). Observing~\ref{websun} it can be seen that the results generated by the sun code in the project accurately resembles that generated by other code, even without taking atmospheric refraction into account.\\
 
-A rudimentary device seen in~\ref{sun-contraption} was used to calculate the physical position of the sun by finding the angle between north and the shadow shadow cast by the device and the length of the shadow created compared to the length of the device. The device is made up of a piece of string tied to a weight and is hung from above to ensure that the device is pointing towards the centre of the Earth. The azimuth was recorded using a magnetic compass and modified to true north by applying Dunedin's magnetic declination (the angle between magnetic north and true north) of approximately 24.8\degree east. Data was taken from this device at three different times on the 5th of October and is presented here in a table:
+A rudimentary device seen in~\ref{sun-contraption} was used to calculate the physical position of the sun by finding the angle between north and the shadow shadow cast by the device and the length of the shadow created compared to the length of the device. The device is made up of a piece of string tied to a weight and is hung from above to ensure that the device is pointing towards the centre of the Earth. The azimuth was recorded using a magnetic compass and modified to true north by applying Dunedin's magnetic declination (the angle between magnetic north and true north) of approximately 24.8\degree east. Data was taken from this device at three different times on the 5th of October and is presented here:\\
 
 \begin{table}
-\begin{tabular}{ | l | l | l | l | p{5cm}}
+\begin{tabular}{ | l | l | l | l | l}
 \hline
 Time & True Sun Azimuth & Sun Azimuth Calculation & Sun Elevation & Sun Elevation Calculation\\ \hline
-13:08 & 15.8\degree & 7.027\degree & 44.09\degree & 48.4507\degree & \\ \hline
+13:08 & 15.8 & 7.027 & 44.09 & 48.4507 \\ \hline
 
 \end{tabular}
 \caption{Calculated position of the sun using real data}
 \label{realsun}
 \end{table}
 
-From~\ref{realsun} it can be seen that the 
+From~\ref{realsun} it can be seen that the\\
 
 \chapter{Viewer}
 \begin{figure}[h]
@@ -143,22 +140,22 @@ From~\ref{realsun} it can be seen that the
 \includegraphics[scale=0.4]{viewer.png}
 \caption{A screenshot of the viewer looking down at Dunedin}
 \end{figure}\note{Good to see the screenshot! :-) Can the brightness/contrast be adjusted? It is very dark on my system.}
-The viewer is an interactive three-dimensional simulator of the Sun moving over Dunedin. It allows the user to view shadows cast by the sun over the varying landscape. It exposes the ability to run in two different modes; shadow-mapping mode, where OpenGL shadow maps are used to generate shadows, and aggregator shadowing mode, where the shadow data from the aggregator is used to calculate shadows. This chapter will focus mostly on the OpenGL and shadow mapping side of the viewer.
+The viewer is an interactive three-dimensional simulator of the Sun moving over Dunedin. It allows the user to view shadows cast by the sun over the varying landscape. It exposes the ability to run in two different modes; shadow-mapping mode, where OpenGL shadow maps are used to generate shadows, and aggregator shadowing mode, where the shadow data from the aggregator is used to calculate shadows. This chapter will focus mostly on the OpenGL and shadow mapping side of the viewer.\\
 
 \section{Drawing the elevation data}
-Geographical height data is drawn by the viewer using OpenGL. After the height data has been gathered by the program OpenGL buffer objects are created to store the vertex position,colour, texture coordinates and vector normals. Buffer objects allow sending the data to be drawn directly to the graphics cards local memory where it can be redrawn and updated quickly without unnecessary resending. Due to the large number vertices present in the height data and the static nature of the data using buffers to store the data lowers the number of graphics hardware calls significantly in comparison to using the fixed function pipeline.
+Geographical height data is drawn by the viewer using OpenGL. After the height data has been gathered by the program OpenGL buffer objects are created to store the vertex position,colour, texture coordinates and vector normals. Buffer objects allow sending the data to be drawn directly to the graphics cards local memory where it can be redrawn and updated quickly without unnecessary resending. Due to the large number vertices present in the height data and the static nature of the data using buffers to store the data lowers the number of graphics hardware calls significantly in comparison to using the fixed function pipeline.\\
 
-In~\ref{viewer} a map overlay taken from Google Maps\cite{gmaps} is drawn onto the scene to show major roads, points of interest and terrain information onto the height data. 
+In~\ref{viewer} a map overlay taken from Google Maps\cite{gmaps} is drawn onto the scene to show major roads, points of interest and terrain information onto the height data. \\
 
 \section{Shadows}
-The viewer is capable of showing shadows generated using OpenGL shadow maps and shadows calculated using the aggregator. 
+The viewer is capable of showing shadows generated using OpenGL shadow maps and shadows calculated using the aggregator. \\
 
 Two methods of shadowing can be shown using the viewer. 
 Shadows are done on the graphics hardware using shadow maps...
 \subsection{Shadow Maps}
 \subsection{Lighting}
 \section{Shadows and Lighting}
-Shadows and lighting can be shown in the viewer in shadow mapping mode and aggregator mode. In shadow mapping mode the shadows are drawn onto the Dunedin map using 
+Shadows and lighting can be shown in the viewer in shadow mapping mode and aggregator mode. In shadow mapping mode the shadows are drawn onto the Dunedin map using \\
 
 \section{Shadow Mapping}
 
@@ -172,9 +169,9 @@ The aggregator is designed to calculate whether a portion of land is in shadow o
 
 
 \section{Picking the areas to scan}
-The overlay image seen in~\ref{overlaytexture} came in useful when running the aggregator because it can be used to segregate different sections of Dunedin such as suburbs and water. The aggregator uses this image to ignore x,y positions that fall in the water 
+The overlay image seen in~\ref{overlaytexture} came in useful when running the aggregator because it can be used to segregate different sections of Dunedin such as suburbs and water. The aggregator uses this image to ignore x,y positions that fall in the water \\
 
-Generating this image was also useful when running the aggregator because the water is already clearly marked on the map and thus areas in the water can be safely ignored to get a speed bonus. 
+Generating this image was also useful when running the aggregator because the water is already clearly marked on the map and thus areas in the water can be safely ignored to get a speed bonus. \\
 
 
 
@@ -222,21 +219,22 @@ A modified version of Cleary's algorithm was used to calculate whether a given b
 \section{Comparison to OpenGL Shadow Mapping}
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{aggregatorvsshadowmapping.png}
+\includegraphics[scale=0.6]{aggregatorvsshadowmapping.png}
 \caption{A side-by-side screenshot comparison of shadowing using shadow mapping (left) and the aggregator (right)}
 \end{figure}
 
-Shadow maps are noticeably less accurate at calculating shadows then the aggregator is. In a side-by-side comparison it can be seen that shadows generated by shadow mapping have noticeable aliasing and calculation errors. Aliasing  around the edge of occurs in the shadow map when the angle between the sun and the map of Dunedin approaches 180\degree and the shadows begin to gen very long. Self-shadowing is also a problem with shadow mapping. Neither of these problems arise in the data aggregator because of the accuracy gained by tracing the area between the shadow and the sun and checking for intersections. The aggregator pays for this accuracy by running slower than real-time (approximately 7 seconds between calculations for a slow machine and 2.5 on a fast machine)compared to the shadow maps which run at >30 calculations/second with a dedicated graphics processor.
+Shadow maps are noticeably less accurate at calculating shadows then the aggregator is. In a side-by-side comparison it can be seen that shadows generated by shadow mapping have noticeable aliasing and calculation errors. Aliasing  around the edge of occurs in the shadow map when the angle between the sun and the map of Dunedin approaches 180\degree and the shadows begin to gen very long. Self-shadowing is also a problem with shadow mapping. Neither of these problems arise in the data aggregator because of the accuracy gained by tracing the area between the shadow and the sun and checking for intersections. The aggregator pays for this accuracy by running slower than real-time (approximately 7 seconds between calculations for a slow machine and 2.5 on a fast machine)compared to the shadow maps which run at >30 calculations/second with a dedicated graphics processor.\\
 
 \section{Optimisations}
-The aggregator can be run faster than by naively checking every height point by checking for shadows around the edges of a small area of land. If there is no shadow present at any of the edges and the area is reasonably flat then it is safe to assume that all of the points within that region will not be in shadow. The aggregator uses a square area of 10 points which it scans around the outside edge of for shadows, if no shadow is found then all of the points within the square are set to be not in shadow.
+The aggregator can be run faster than by naively checking every height point by checking for shadows around the edges of a small area of land. If there is no shadow present at any of the edges and the area is reasonably flat then it is safe to assume that all of the points within that region will not be in shadow. The aggregator uses a square area of 10 points which it scans around the outside edge of for shadows, if no shadow is found then all of the points within the square are set to be not in shadow.\\
 
 \subsection{Speed increase}
-To test the effect of the optimisations the data aggregator was run 1000 times on the whole of Dunedin (ignoring only water) between the times of 08:00:00 and 17:59:24 on October 1st 2011, with the average time in milliseconds it took to run the aggregator recorded at each time. On a 1.9GHz AMD Dual Core Turion processor the optimised code took an average of 6800.486 milliseconds and the unoptimised code took 15977.598 milliseconds to calculate all of the shadows at a given time. Using 2.66 GHz Intel Core i7 920 processor the optimised code took an average of 1147.176 milliseconds and the unoptimised code took 2551.007 milliseconds to calculate the shadows. Using the optimised code increased the speed by a factor of 2.35x on the 1.9GHz processor and 2.19x on the 2.66GHz processor.
+To test the effect of the optimisations the data aggregator was run 1000 times on the whole of Dunedin (ignoring only water) between the times of 08:00:00 and 17:59:24 on October 1st 2011, with the average time in milliseconds it took to run the aggregator recorded at each time. On a 1.9GHz AMD Dual Core Turion processor the optimised code took an average of 6800.486 milliseconds and the unoptimised code took 15977.598 milliseconds to calculate all of the shadows at a given time. Using 2.66 GHz Intel Core i7 920 processor the optimised code took an average of 1147.176 milliseconds and the unoptimised code took 2551.007 milliseconds to calculate the shadows. Using the optimised code increased the speed by a factor of 2.35x on the 1.9GHz processor and 2.19x on the 2.66GHz processor.\\
 
 This shows that the extra effort in running the optimisation algorithm 
 \subsection{Other Methods}
-The code does not necessarily need to be optimised to speed it up. Now that multi-core processors are becoming more common on modern day computers multi-threading the aggregator code to take advantage of more than one processor at a time. The way the testing for shadows is implemented is easily threadable by spawning a thread for every block in the array that needs to be processed.
+The code does not necessarily need to be optimised to speed it up. Now that multi-core processors are becoming more common on modern day computers multi-threading the aggregator code to take advantage of more than one processor at a time. The way the testing for shadows is implemented is easily threadable by spawning a thread for every block in the array that needs to be processed.\\
+
 Implementing this could even be programmed in massively multi-threading languages such as OpenCL 
 
 \note{Good. Well expressed, too. Perhaps mention that there are more general forms of this optimisation strategy, but that there will be a cross-over point between the efficiency gained by not computing shadow rays against the extra effort in running the optimisation algorithm.}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.9.4)  3 OCT 2011 21:37
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.9.4)  5 OCT 2011 16:52
 entering extended mode
 **480.tex
 (C:\Users\l3s1i3\Documents\report\480.tex
@@ -63,27 +63,764 @@ Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithms\algorithm.sty"
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
 
-! LaTeX Error: File `algorithm.sty' not found.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count89
+\float@exts=\toks15
+\float@box=\box26
+\@float@everytoks=\toks16
+\@floatcapt=\box27
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks17
+\c@algorithm=\count90
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithms\algorithmic.sty"
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+\c@ALC@unique=\count91
+\c@ALC@line=\count92
+\c@ALC@rem=\count93
+\c@ALC@depth=\count94
+\ALC@tlm=\skip43
+\algorithmicindent=\skip44
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\keystroke\keystroke.sty"
+Package: keystroke 2010/04/23 v1.6 3D keystrokes (SuSE GmbH/RN)
+\suse@key=\box28
+\keystroke@left=\box29
+\keystroke@right=\box30
+\keystroke@middle=\box31
 
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: sty)
+<keystroke_left.pdf, id=1, 42.1575pt x 195.73125pt>
+File: keystroke_left.pdf Graphic file (type pdf)
+ <use keystroke_left.pdf>
+Package pdftex.def Info: keystroke_left.pdf used on input line 171.
+(pdftex.def)             Requested size: 42.15738pt x 195.73076pt.
 
-Enter file name: 
-! Emergency stop.
-<read *> 
-         
-l.4 \usepackage
-               {algorithmic}
-*** (cannot \read from terminal in nonstop modes)
+<keystroke_middle.pdf, id=2, 116.435pt x 195.73125pt>
+File: keystroke_middle.pdf Graphic file (type pdf)
 
- 
+<use keystroke_middle.pdf>
+Package pdftex.def Info: keystroke_middle.pdf used on input line 172.
+(pdftex.def)             Requested size: 116.43471pt x 195.73076pt.
+
+<keystroke_right.pdf, id=3, 42.1575pt x 195.73125pt>
+File: keystroke_right.pdf Graphic file (type pdf)
+ <use keystroke_right.pdf>
+Package pdftex.def Info: keystroke_right.pdf used on input line 173.
+(pdftex.def)             Requested size: 42.15738pt x 195.73076pt.
+) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdfcomment\pdfcomment.sty"
+Package: pdfcomment 2011/05/21 pdfcomment.sty v2.2 - Josef Kleber (C) 2008-2011
+
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+\XKV@toks=\toks18
+\XKV@tempa@toks=\toks19
+\XKV@depth=\count95
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+))
+\c@pc@annot@lines=\count96
+\pc@mathannot@box=\box32
+\pc@dima=\skip45
+\pc@dimb=\skip46
+\pc@dimc=\skip47
+\pc@dimd=\skip48
+\pc@dime=\skip49
+\pc@dimf=\skip50
+\pc@dimg=\skip51
+\pc@dimh=\skip52
+\pc@dimi=\skip53
+\pc@Sposx=\skip54
+\pc@Sposy=\skip55
+\pc@Eposx=\skip56
+\pc@Eposy=\skip57
+\pc@box@width=\skip58
+\pc@box@height=\skip59
+\pc@box@depth=\skip60
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\zref-savepos.sty"
+Package: zref-savepos 2011/03/18 v2.21 Module savepos for zref (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\zref-base.sty"
+Package: zref-base 2011/03/18 v2.21 Module base for zref (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty"
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
+Package zref Info: New property list: main on input line 707.
+Package zref Info: New property: default on input line 708.
+Package zref Info: New property: page on input line 709.
+)
+Package zref Info: New property list: savepos on input line 75.
+Package zref Info: New property: posx on input line 76.
+Package zref Info: New property: posy on input line 77.
+)
+\c@zref@unique=\count97
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\calc.sty"
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count98
+\calc@Bcount=\count99
+\calc@Adimen=\dimen105
+\calc@Bdimen=\dimen106
+\calc@Askip=\skip61
+\calc@Bskip=\skip62
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count100
+\calc@Cskip=\skip63
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\marginnote\marginnote.sty"
+Package: marginnote 2010/01/05 v1.1f non floating margin notes for LaTeX
+\c@mn@abspage=\count101
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\datetime\datetime.sty"
+Package: datetime 2010/09/21 v2.58 Date Time Package
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fmtcount.sty"
+Package: fmtcount 2009/10/02 v1.31
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ams\math\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks20
+\ex@=\dimen107
+)
+\c@padzeroesN=\count102
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-english.def"
+File: fc-english 2007/05/26
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-UKenglish.def"
+File: fc-UKenglish 2007/06/14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-british.def"
+File: fc-british 2007/06/14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-USenglish.def"
+File: fc-USenglish 2007/06/14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-spanish.def"
+File: fc-spanish.def 2007/05/26
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-portuges.def"
+File: fc-portuges.def 2007/05/26
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-french.def"
+File: fc-french.def 2007/05/26
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-german.def"
+File: fc-german.def 2007/06/14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fmtcount\fc-italian.def"
+File: fc-italian.def 2009/10/02 Italian support for fmtcount (Edoardo Pasca)
+)
+No configuration file fmtcount.cfg found.
+\@DT@modctr=\count103
+\@ordinalctr=\count104
+\@orgargctr=\count105
+\@strctr=\count106
+\@tmpstrctr=\count107
+\@DT@loopN=\count108
+\@DT@X=\count109
+)
+\@day=\count110
+\@month=\count111
+\@year=\count112
+\c@HOUR=\count113
+\c@HOURXII=\count114
+\c@MINUTE=\count115
+\c@TOHOUR=\count116
+\c@TOMINUTE=\count117
+\c@SECOND=\count118
+\currenthour=\count119
+\currentminute=\count120
+\currentsecond=\count121
+Package datetime Info: No datetime.cfg file found, using default settings on in
+put line 292.
+\@dtctr=\count122
+\dayofyear=\count123
+\dayofweek=\count124
+LaTeX Info: Redefining \today on input line 724.
+\dt@a=\toks21
+\dt@b=\toks22
+) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
+Package: hyperref 2011/08/19 v6.82h Hypertext links for LaTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty"
+Package: hobsub-hyperref 2011/04/23 v1.4 Bundle oberdiek, subset hyperref (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty"
+Package: hobsub-generic 2011/04/23 v1.4 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2011/04/23 v1.4 Subsetting bundle oberdiek (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package hobsub Info: Skipping package `ifluatex' (already loaded).
+Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package hobsub Info: Skipping package `etexcmds' (already loaded).
+Package hobsub Info: Skipping package `kvsetkeys' (already loaded).
+Package hobsub Info: Skipping package `kvdefinekeys' (already loaded).
+Package hobsub Info: Skipping package `pdftexcmds' (already loaded).
+Package: pdfescape 2011/04/04 v1.12 Provides string conversions (HO)
+Package: bigintcalc 2011/01/30 v1.2 Expandable big integer calculations (HO)
+Package: bitset 2011/01/30 v1.1 Data type bit set (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provides unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2011/01/30 v1.0 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/04/23 v1.7 Hooks at very end of document (HO)
+Package: atbegshi 2011/01/30 v1.15 At begin shipout hook (HO)
+Package: refcount 2010/12/01 v3.2 Data extraction from references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options of hyperref/bookmark (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
+)
+\@linkdim=\dimen108
+\Hy@linkcounter=\count125
+\Hy@pagecounter=\count126
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
+File: pd1enc.def 2011/08/19 v6.82h Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count127
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4053.
+Package hyperref Info: Link nesting OFF on input line 4058.
+Package hyperref Info: Hyper index ON on input line 4061.
+Package hyperref Info: Plain pages OFF on input line 4068.
+Package hyperref Info: Backreferencing OFF on input line 4073.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4291.
+\c@Hy@tempcnt=\count128
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\url.sty"
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4644.
+\Fld@menulength=\count129
+\Field@Width=\dimen109
+\Fld@charsize=\dimen110
+Package hyperref Info: Hyper figures OFF on input line 5730.
+Package hyperref Info: Link nesting OFF on input line 5735.
+Package hyperref Info: Hyper index ON on input line 5738.
+Package hyperref Info: backreferencing OFF on input line 5745.
+Package hyperref Info: Link coloring OFF on input line 5750.
+Package hyperref Info: Link coloring with OCG OFF on input line 5755.
+Package hyperref Info: PDF/A mode OFF on input line 5760.
+LaTeX Info: Redefining \ref on input line 5800.
+LaTeX Info: Redefining \pageref on input line 5804.
+\Hy@abspage=\count130
+\c@Item=\count131
+\c@Hfootnote=\count132
+)
+
+Package hyperref Message: Driver: hpdftex.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def"
+File: hpdftex.def 2011/08/19 v6.82h Hyperref driver for pdfTeX
+\Fld@listcount=\count133
+\c@bookmark@seq@number=\count134
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty"
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip64
+)
+Package zref Info: New property list: pdfcomment on input line 2652.
+Package zref Info: New property: PCPDFOBJID on input line 2653.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\was\gensymb.sty"
+Package: gensymb 2003/07/02 v1.0 (WaS)
+)
+(C:\Users\l3s1i3\Documents\report\480.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count135
+\scratchdimen=\dimen111
+\scratchbox=\box33
+\nofMPsegments=\count136
+\nofMParguments=\count137
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count138
+\MPscratchDim=\dimen112
+\MPnumerator=\count139
+\makeMPintoPDFobject=\count140
+\everyMPtoPDFconversion=\toks24
+)
+Package marginnote Info: \pdfoutput not 0 and \pdflastxpos available.
+(marginnote)             Extended position detection mode activated.
+\AtBeginShipoutBox=\box34
+Package hyperref Info: Link coloring OFF on input line 21.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
+Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count141
+)
+LaTeX Info: Redefining \ref on input line 21.
+LaTeX Info: Redefining \pageref on input line 21.
+LaTeX Info: Redefining \nameref on input line 21.
+
+(C:\Users\l3s1i3\Documents\report\480.out)
+(C:\Users\l3s1i3\Documents\report\480.out)
+\@outlinefile=\write3
+LaTeX Info: Redefining \celsius on input line 21.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 21.
+
+
+
+Package gensymb Warning: Not defining \perthousand.
+
+LaTeX Info: Redefining \ohm on input line 21.
+Package gensymb Info: Using \Omega for \ohm on input line 21.
+
+Package gensymb Warning: Not defining \micro.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 23.
+[1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]pdfTeX warning (ext4): des
+tination with the same identifier (name{page.1}) has been already used, duplica
+te ignored
+<to be read again> 
+                   \relax 
+l.26 \end{abstract}
+                    [1] (C:\Users\l3s1i3\Documents\report\480.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 2.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.27 ...to OpenGL Shadow Mapping}{17}{section.4.3}
+                                                   [1
+
+])
+\tf@toc=\write4
+ [2]
+(C:\Users\l3s1i3\Documents\report\480.lof
+Overfull \hbox (9.55573pt too wide) in paragraph at lines 9--9
+ [][] [][]\OT1/cmr/m/n/12 A side-by-side screen-shot com-par-i-son of shad-ow-i
+ng us-ing shadow 
+ []
+
+)
+\tf@lof=\write5
+ [3
+
+] (C:\Users\l3s1i3\Documents\report\480.loa)
+\tf@loa=\write6
+ [4
+
+]
+Chapter 1.
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--36
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
+
+ []
+
+[5
+
+]
+
+LaTeX Warning: Citation `JOGL' on page 6 undefined on input line 42.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+
+ []
+
+Package hyperref Info: bookmark level for unknown lpcsec defaults to 0 on input
+ line 44.
+[6]
+Chapter 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+
+ []
+
+<height.png, id=227, 1241.63875pt x 886.31125pt>
+File: height.png Graphic file (type png)
+ <use height.png>
+Package pdftex.def Info: height.png used on input line 52.
+(pdftex.def)             Requested size: 310.40892pt x 221.57727pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+<terrain.png, id=229, 1241.63875pt x 886.31125pt>
+File: terrain.png Graphic file (type png)
+ <use terrain.png>
+Package pdftex.def Info: terrain.png used on input line 62.
+(pdftex.def)             Requested size: 310.40892pt x 221.57727pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
+
+ []
+
+[7
+
+] [8 <C:/Users/l3s1i3/Documents/report/height.png> <C:/Users/l3s1i3/Documents/r
+eport/terrain.png>]
+
+LaTeX Warning: Citation `gpsaltitude' on page 9 undefined on input line 70.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--71
+
+ []
+
+
+LaTeX Warning: Citation `srtm' on page 9 undefined on input line 72.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
+
+ []
+
+[9]
+
+LaTeX Warning: Citation `redshift' on page 10 undefined on input line 83.
+
+
+LaTeX Warning: Citation `javasunlib' on page 10 undefined on input line 83.
+
+
+LaTeX Warning: Citation `psa' on page 10 undefined on input line 83.
+
+
+LaTeX Warning: Citation `spa' on page 10 undefined on input line 83.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--87
+
+ []
+
+
+LaTeX Warning: Citation `usnoaa' on page 10 undefined on input line 88.
+
+
+LaTeX Warning: Citation `astronomicalalgorithms' on page 10 undefined on input 
+line 88.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
+
+ []
+
+
+LaTeX Warning: Citation `solarazi' on page 10 undefined on input line 90.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+[10]
+
+LaTeX Warning: Citation `sunrise' on page 11 undefined on input line 97.
+
+<contraption.jpg, id=247, 963.6pt x 722.7pt>
+File: contraption.jpg Graphic file (type jpg)
+ <use contraption.jpg>
+Package pdftex.def Info: contraption.jpg used on input line 100.
+(pdftex.def)             Requested size: 385.43317pt x 289.07487pt.
+
+Overfull \hbox (242.97333pt too wide) in paragraph at lines 106--115
+[][] 
+ []
+
+
+LaTeX Warning: Citation `solarpos' on page 11 undefined on input line 115.
+
+
+LaTeX Warning: Citation `solarpos' on page 11 undefined on input line 115.
+
+
+LaTeX Warning: Citation `solarpos' on page 11 undefined on input line 120.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--121
+
+ []
+
+[11] [12 <C:/Users/l3s1i3/Documents/report/contraption.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
+
+ []
+
+
+Overfull \hbox (128.8856pt too wide) in paragraph at lines 125--131
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
+
+ []
+
+[13]
+Chapter 3.
+<viewer.png, id=268, 762.59906pt x 551.05875pt>
+File: viewer.png Graphic file (type png)
+ <use viewer.png>
+Package pdftex.def Info: viewer.png used on input line 140.
+(pdftex.def)             Requested size: 305.03421pt x 220.41959pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--144
+
+ []
+
+[14
+
+ <C:/Users/l3s1i3/Documents/report/viewer.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
+
+ []
+
+
+LaTeX Warning: Reference `viewer' on page 15 undefined on input line 148.
+
+
+LaTeX Warning: Citation `gmaps' on page 15 undefined on input line 148.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
+
+ []
+
+[15] [16]
+Chapter 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--173
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
+
+ []
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 184.
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--193
+[] []\OT1/cmr/bx/n/12 while $\OML/cmm/m/it/12 xPosition < map:widthandyPostion 
+<$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
+[] []\OT1/cmr/bx/n/12 if $\OML/cmm/m/it/12 hieghtatxPostionandyPositionandABS\O
+T1/cmr/m/n/12 (\OML/cmm/m/it/12 MAX\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 tdx; tdy\O
+T1/cmr/m/n/12 )) \OML/cmm/m/it/12 >$
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (3.62556pt too wide) in paragraph at lines 219--219
+[]\OT1/cmr/bx/n/17.28 Comparison to OpenGL Shadow Map-ping 
+ []
+
+<aggregatorvsshadowmapping.png, id=288, 760.34062pt x 277.035pt>
+File: aggregatorvsshadowmapping.png Graphic file (type png)
+
+<use aggregatorvsshadowmapping.png>
+Package pdftex.def Info: aggregatorvsshadowmapping.png used on input line 222.
+(pdftex.def)             Requested size: 456.20789pt x 166.22227pt.
+
+Overfull \hbox (66.20789pt too wide) in paragraph at lines 222--223
+ [][] 
+ []
+
+[17
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 226--227
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
+
+ []
+
+[18 <C:/Users/l3s1i3/Documents/report/aggregatorvsshadowmapping.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 232--233
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
+
+ []
+
+
+Overfull \hbox (3.48619pt too wide) in paragraph at lines 238--239
+[]\OT1/cmr/m/n/12 Implementing this could even be pro-grammed in mas-sively mul
+ti-threading
+ []
+
+[19] [20] [21]
+Chapter 5.
+No file 480.bbl.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 249.
+[22
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 249.
+ (C:\Users\l3s1i3\Documents\report\480.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 249.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 249.
+Package rerunfilecheck Info: File `480.out' has not changed.
+(rerunfilecheck)             Checksum: 31DF5CB72CC8EAB1C2D4EB757884BC06;2070.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 811 strings out of 494045
- 10559 string characters out of 3145967
- 60181 words of memory out of 3000000
- 4166 multiletter control sequences out of 15000+200000
- 3938 words of font info for 15 fonts, out of 3000000 for 9000
+ 7998 strings out of 494045
+ 133581 string characters out of 3145967
+ 239553 words of memory out of 3000000
+ 11064 multiletter control sequences out of 15000+200000
+ 9583 words of font info for 34 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 27i,0n,19p,237b,36s stack positions out of 5000i,500n,10000p,200000b,50000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 42i,7n,38p,916b,634s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on 480.pdf (24 pages, 1341491 bytes).
+PDF statistics:
+ 397 PDF objects out of 1000 (max. 8388607)
+ 100 named destinations out of 1000 (max. 500000)
+ 305 words of extra memory for PDF output out of 10000 (max. 10000000)
+
